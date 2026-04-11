@@ -32,7 +32,7 @@ class CourseIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Title', 'title'),
+            Text::make('Title', 'title')->searchable(),
             Text::make('Subjects', 'subjects'),
             Number::make('Student Count', 'student_count'),
             Text::make('Duration', 'duration'),

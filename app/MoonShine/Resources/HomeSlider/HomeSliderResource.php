@@ -20,7 +20,10 @@ class HomeSliderResource extends ModelResource
 {
     protected string $model = HomeSlider::class;
 
-    protected string $title = 'Maktab rahbariyat';
+    public function title(): string
+    {
+        return __('messages.leadership');
+    }
 
     /**
      * @return list<class-string<PageContract>>

@@ -14,6 +14,7 @@ use App\Http\Controllers\AchievementController;
 
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/about', [SliderController::class, 'index'])->name('about');
 Route::get('/teachers', [TeacherController::class,'index'])->name('teachers');
@@ -23,6 +24,18 @@ Route::get('/photo', [VideoController::class, 'index'])->name('photo');
 // Route::get('/yutuqlar', [PhotocardController::class, 'index'])->name('achievements');
 Route::get('/achievements', [PhotocardController::class,'index'])->name('achievements');
 Route::get('/aloqa', [ContactController::class, 'index'])->name('contact');
+Route::get('/lang/{locale}', function ($locale, Request $request) {
+    if (in_array($locale, ['uz', 'ru'])) {
+        session(['_lang' => $locale]);
+        session()->save();
+    }
+    
+    if ($request->ajax() || $request->wantsJson()) {
+        return response()->json(['status' => 'success']);
+    }
+
+    return redirect($request->headers->get('referer', route('home')));
+})->name('lang.switch');
 
 //Route::get('/statistics', [AboutStaticController::class, 'index']);
 

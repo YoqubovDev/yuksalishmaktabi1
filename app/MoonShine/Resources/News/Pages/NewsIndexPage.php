@@ -33,7 +33,7 @@ class NewsIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Sarlavha', 'title')->required(),
+            Text::make('Sarlavha', 'title')->required()->searchable(),
             Text::make('Fan nomi', 'subjects')->nullable(),
             Number::make('Talabalar soni', 'student_count')->nullable(),
             Text::make('Davomiyligi', 'duration')->nullable(),

@@ -12,6 +12,7 @@ $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'autoClose' => $isAutoClose ?? false,
     'closeOutside' => $isCloseOutside ?? true,
     'title' => '',
+    'subtitle' => null,
     'outerHtml' => null
 ]));
 
@@ -39,6 +40,7 @@ foreach (array_filter(([
     'autoClose' => $isAutoClose ?? false,
     'closeOutside' => $isCloseOutside ?? true,
     'title' => '',
+    'subtitle' => null,
     'outerHtml' => null
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
@@ -62,7 +64,7 @@ unset($__defined_vars, $__key, $__value); ?>
     <template x-teleport="body">
         <div
             class="modal-template"
-            <?php echo MoonShine\Support\AlpineJs::eventBlade('modal_toggled', $name, 'toggleModal'); ?>
+            <?php echo MoonShine\Support\AlpineJs::eventBlade('modal_toggled', $name, 'toggleModal($event)'); ?>
         >
             <div
                 x-show="open"
@@ -84,7 +86,12 @@ unset($__defined_vars, $__key, $__value); ?>
                 >
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title"><?php echo e($title ?? ''); ?></h5>
+                            <div>
+                                <h5 class="modal-title"><?php echo e($title ?? ''); ?></h5>
+                                <?php if(!is_null($subtitle)): ?>
+                                    <p class="modal-subtitle"><?php echo e($subtitle); ?></p>
+                                <?php endif; ?>
+                            </div>
                             <button
                                 type="button"
                                 class="modal-close btn-fit"

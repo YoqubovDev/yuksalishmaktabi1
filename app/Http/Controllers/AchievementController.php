@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Achievement;
+use App\Models\ExamStats;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,7 +12,8 @@ class AchievementController extends Controller
     public function index()
     {
         $achievements = Achievement::all();
-        return view('achievements', compact('achievements'));
+        $stats = ExamStats::first();
+        return view('achievements', compact('achievements', 'stats'));
     }
 
     public function show(Achievement $achievement)

@@ -32,8 +32,8 @@ class TeacherIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Ism', 'name'),
-            Text::make('Fan', 'subject'),
+            Text::make('Ism', 'name')->searchable(),
+            Text::make('Fan', 'subject')->searchable(),
             Text::make('Bio' , 'bio'),
             Image::make('Rasm', 'image'),
         ];

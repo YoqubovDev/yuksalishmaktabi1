@@ -35,10 +35,7 @@ foreach ($attributes->all() as $__key => $__value) {
 unset($__defined_vars, $__key, $__value); ?>
 
 <div <?php echo e($attributes->merge([
-    'class' => Arr::toCssClasses([
-        'grid grid-cols-12',
-        "gap-$gap",
-    ]),
+    'class' => "grid grid-cols-12 gap-$gap",
 ])); ?>>
     <?php if (isset($component)) { $__componentOriginal19b4fc714625cdcf69d1dc3ea40c6055 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal19b4fc714625cdcf69d1dc3ea40c6055 = $attributes; } ?>

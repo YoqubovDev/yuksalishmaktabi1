@@ -20,7 +20,10 @@ class AboutStaticResource extends ModelResource
 {
     protected string $model = AboutStatic::class;
 
-    protected string $title = 'About Statics';
+    public function title(): string
+    {
+        return __('messages.about_static');
+    }
 
     /**
      * @return list<class-string<PageContract>>

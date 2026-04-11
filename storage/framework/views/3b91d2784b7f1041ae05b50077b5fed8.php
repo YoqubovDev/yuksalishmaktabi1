@@ -3,6 +3,7 @@
 $__newAttributes = [];
 $__propNames = \Illuminate\View\ComponentAttributeBag::extractPropNames(([
     'name',
+    'interval' => null,
     'components' => [],
 ]));
 
@@ -21,6 +22,7 @@ unset($__newAttributes);
 
 foreach (array_filter(([
     'name',
+    'interval' => null,
     'components' => [],
 ]), 'is_string', ARRAY_FILTER_USE_KEY) as $__key => $__value) {
     $$__key = $$__key ?? $__value;
@@ -60,4 +62,12 @@ unset($__defined_vars, $__key, $__value); ?>
 
     </div>
 <?php echo $__env->stopFragment(); ?>
+
+<?php if($interval): ?>
+    <script>
+        setInterval(() => {
+            window.dispatchEvent(new CustomEvent('fragment_updated:<?php echo e($name); ?>'))
+        }, <?php echo e($interval); ?>)
+    </script>
+<?php endif; ?>
 <?php /**PATH /home/shehroz/Projects/example-app/vendor/moonshine/moonshine/src/Laravel/src/Providers/../../../UI/resources/views/components/fragment.blade.php ENDPATH**/ ?>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -664,32 +664,25 @@
     </style>
 </head>
 <body x-data @keydown.escape.window="$store.modal?.showModal = false">
-  <!-- Navigation Bar -->
-  <header>
-      <div class="container">
-          <div class="header-content">
-              <div class="logo">
-                  <img style="border-radius: 500px" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="yuksalish-maktabi-al-logo.jpeg">
-                  <div class="logo-text">Jizzax Shahar Yuksalish Maktabi</div>
-              </div>
-              <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-                  <i class="fas fa-bars menu-icon"></i>
-                  <i class="fas fa-times close-icon"></i>
-              </button>
-              <nav id="mainNav">
-                  <ul>
-                      <li><a href="<?php echo e(route('home')); ?>">Home</a></li>
-                      <li><a href="<?php echo e(route('about')); ?>">Maktab haqida</a></li>
-                      <!-- <li><a href="<?php echo e(route('photo')); ?>">Yangiliklar</a></li> -->
-                      <li><a href="<?php echo e(route('teachers')); ?>">O'qituvchilar</a></li>
-                      <li><a href="<?php echo e(route('subject')); ?>">Dars jarayonlari</a></li>
-                      <li><a href="<?php echo e(route('achievements')); ?>">Yutuqlar</a></li>
-                      <li><a href="<?php echo e(route('contact')); ?>">Aloqa</a></li>
-                  </ul>
-              </nav>
-          </div>
-      </div>
-  </header>
+  <?php if (isset($component)) { $__componentOriginalfd1f218809a441e923395fcbf03e4272 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalfd1f218809a441e923395fcbf03e4272 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.header','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('header'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?> <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalfd1f218809a441e923395fcbf03e4272)): ?>
+<?php $attributes = $__attributesOriginalfd1f218809a441e923395fcbf03e4272; ?>
+<?php unset($__attributesOriginalfd1f218809a441e923395fcbf03e4272); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalfd1f218809a441e923395fcbf03e4272)): ?>
+<?php $component = $__componentOriginalfd1f218809a441e923395fcbf03e4272; ?>
+<?php unset($__componentOriginalfd1f218809a441e923395fcbf03e4272); ?>
+<?php endif; ?>
 
   <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -752,11 +745,12 @@
         <div class="absolute inset-0 gradient-overlay flex flex-col items-center justify-center text-white">
           <p class="text-white mb-4 flex items-center font-light tracking-widest uppercase text-sm">
             <span class="mr-2"><i class="fas fa-graduation-cap"></i></span>
-              bilim innovatsiyaga yo‘li
+              <?php echo e(__('messages.hero_way')); ?>
+
           </p>
-            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow">Jizzax Shahar Yuksalish maktabi bilan</h3>
-            <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold">Kelajagingni kashf et</h2>
-          <p class="text-lg max-w-2xl text-center mb-12 font-light">Zehinlilarni tarbiyalaymiz, yetakchilarni voyaga yetkazamiz. Bugunoq jonli va faol akademik hamjamiyatimizga qo‘shiling.</p>
+            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow"><?php echo e(__('messages.hero_with')); ?></h3>
+            <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold"><?php echo e(__('messages.hero_discover')); ?></h2>
+          <p class="text-lg max-w-2xl text-center mb-12 font-light"><?php echo e(__('messages.hero_desc1')); ?></p>
         </div>
       </div>
 
@@ -766,11 +760,12 @@
         <div class="absolute inset-0 gradient-overlay flex flex-col items-center justify-center text-white">
           <p class="text-white mb-4 flex items-center font-light tracking-widest uppercase text-sm">
             <span class="mr-2"><i class="fas fa-users"></i></span>
-              Birlik va mukammallik
+              <?php echo e(__('messages.hero_unity')); ?>
+
           </p>
-            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow">Biz bilan</h3>
-            <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold">O‘z ishtiyoqingni angla</h2>
-          <p class="text-lg max-w-2xl text-center mb-12 font-light">Huradan tortib fanlargacha – bizning qo‘llab-quvvatlovchi muhitimizda o‘z yo‘lingizni toping.</p>
+            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow"><?php echo e(__('messages.hero_us')); ?></h3>
+            <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold"><?php echo e(__('messages.hero_passion')); ?></h2>
+          <p class="text-lg max-w-2xl text-center mb-12 font-light"><?php echo e(__('messages.hero_desc2')); ?></p>
         </div>
       </div>
 
@@ -780,11 +775,12 @@
         <div class="absolute inset-0 gradient-overlay flex flex-col items-center justify-center text-white">
           <p class="text-white mb-4 flex items-center font-light tracking-widest uppercase text-sm">
             <span class="mr-2"><i class="fas fa-microscope"></i></span>
-              Tadqiqot va innovatsiya
+              <?php echo e(__('messages.hero_research')); ?>
+
           </p>
-          <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold">Ertangi kuningni</h2>
-          <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow">Bugun qur</h3>
-          <p class="text-lg max-w-2xl text-center mb-12 font-light">Zamonaviy jihozlangan infratuzilmamiz ilg‘or tadqiqotlar va innovatsiyalarni qo‘llab-quvvatlaydi.</p>
+          <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold"><?php echo e(__('messages.hero_tomorrow')); ?></h2>
+          <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow"><?php echo e(__('messages.hero_build_today')); ?></h3>
+          <p class="text-lg max-w-2xl text-center mb-12 font-light"><?php echo e(__('messages.hero_desc3')); ?></p>
         </div>
       </div>
     </div>
@@ -842,22 +838,22 @@
   <section id="about" class="bg-gray-100 py-12">
     <div class="container mx-auto px-6">
       <div class="bg-white rounded-lg shadow-lg p-8">
-        <h2 class="text-4xl font-bold text-unipix-blue text-center mb-8">Biz Haqimizda</h2>
+        <h2 class="text-4xl font-bold text-unipix-blue text-center mb-8"><?php echo e(__('messages.about_us')); ?></h2>
         <p class="text-gray-600 text-lg mb-6">
             Yuksalish maktabi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat talabalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
         </p>
-        <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Afzalliklarimiz</h3>
+        <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.advantages')); ?></h3>
         <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
           <li><strong>Professional o'qituvchilar:</strong>Maktabimiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
           <li><strong>Innovatsion metodologiyalar:</strong> O'qitish zamonaviy texnologiyalar va interfaol ta'lim usullaridan foydalangan holda amalga oshiriladi.</li>
           <li><strong>Amaliy o'quv jarayoni:</strong> Haqiqiy loyihalar va amaliy mashg'ulotlar orqali nazariy bilimlarni mustahkamlash imkoniyati.</li>
           <li><strong>Global yondashuv:</strong> Talabalarga xalqaro standartlarga javob beradigan bilim va ko'nikmalar beriladi.</li>
         </ul>
-        <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Tariximiz</h3>
+        <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.history')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
             2023 yilda tashkil etilgan Jizzax shahridagi Yuksalish maktab O'zbekiston yoshlariga sifatli ta'lim berish maqsadida tashkil etilgan. 450 nafar o'quvchiga mo'ljallangan  maktabi milliy ta'lim standartlariga asoslangan zamonaviy o'quv muhitini taklif etadi. U talabalarni fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha qat'iy dasturlar orqali tayyorlaydi. Qabul ingliz tilidagi rasmiy intervyu bilan bir qatorda matematika, fizika va ingliz tilidagi test natijalariga asoslanadi. Yuksalish maktabi o'quvchilarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi martabalariga erishishda g'urur bilan qo'llab-quvvatlaydi.
         </p>
-        <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Missiyamiz</h3>
+        <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.mission')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
             Bizning vazifamiz talabalarga akademik salohiyati va shaxsiy o'sishini ta'minlaydigan yuqori sifatli ta'lim berishdir. Biz talabalar fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha chuqur bilim olishlari mumkin bo'lgan dinamik o'quv muhitini ta'minlashga intilamiz. Tajribali fakulteti orqali, zamonaviy inshootlari, va mukammallikni uchun majburiyat, biz universitet uchun emas, balki faqat bizning talabalarga tayyorlash, lekin ularning kelajakda martaba muvaffaqiyat va jamiyat uchun mazmunli hissasi uchun.
         </p>
@@ -868,7 +864,7 @@
   <!-- Team Section -->
   <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4">
-          <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">Yuksalish Maktab Rahbariyati</h3>
+          <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center"><?php echo e(__('messages.leadership')); ?></h3>
 
           <div class="swiper teacherSwiper">
               <div class="swiper-wrapper">

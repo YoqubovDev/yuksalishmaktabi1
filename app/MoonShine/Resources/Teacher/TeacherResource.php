@@ -20,7 +20,10 @@ class TeacherResource extends ModelResource
 {
     protected string $model = Teacher::class;
 
-    protected string $title = "O'qituvchilar ";
+    public function title(): string
+    {
+        return __('messages.teachers');
+    }
 
     /**
      * @return list<class-string<PageContract>>

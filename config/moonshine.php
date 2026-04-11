@@ -96,9 +96,10 @@ return [
     ],
 
     // Localizations
-    'locale' => 'en',
+    'locale' => 'uz',
     'locale_key' => ChangeLocale::KEY,
     'locales' => [
-        // en
+        'uz' => 'O\'zbekcha',
+        'ru' => 'Русский',
     ],
 ];

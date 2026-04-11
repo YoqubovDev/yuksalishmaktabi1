@@ -54,12 +54,6 @@ unset($__defined_vars, $__key, $__value); ?>
 >
 <?php endif; ?>
 
-<?php if(isset($assets['web-manifest'])): ?>
-<link rel="manifest"
-      href="<?php echo e($assets['web-manifest']); ?>"
->
-<?php endif; ?>
-
 <?php if(isset($assets['safari-pinned-tab'])): ?>
 <link rel="mask-icon"
       href="<?php echo e($assets['safari-pinned-tab']); ?>"

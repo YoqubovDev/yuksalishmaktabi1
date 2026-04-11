@@ -46,12 +46,12 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
 
-            MenuGroup::make("Home", [
+            MenuGroup::make(__('messages.home'), [
                 MenuItem::make(ReceptionResource::class)->icon('briefcase'),
                 MenuItem::make(HomeSliderResource::class)->icon('user-group'),
             ])->icon("home"),
 
-            MenuGroup::make("Maktab haqida", [
+            MenuGroup::make(__('messages.about'), [
 
                 MenuItem::make(AboutStaticResource::class)->icon('arrow-trending-up'),
                 MenuItem::make(NewsResource::class)->icon('megaphone'),
@@ -59,7 +59,7 @@ final class MoonShineLayout extends AppLayout
             ])->icon("building-library"),
 
 
-            MenuGroup::make("O'qituvchilar", [
+            MenuGroup::make(__('messages.teachers'), [
                 MenuItem::make(TeacherStatsResource::class)->icon('presentation-chart-line'),
                 MenuItem::make(TeacherResource::class)->icon("user"),
                 MenuItem::make(DepartmentsResource::class)->icon("building-office-2"),
@@ -68,7 +68,7 @@ final class MoonShineLayout extends AppLayout
             ])->icon("users"),
 
 
-            MenuGroup::make("Dars jarayonlari", [
+            MenuGroup::make(__('messages.subjects'), [
                 MenuItem::make(GroupResource::class)->icon('user-group'),
                 MenuItem::make(CourseResource::class)->icon('book-open'),
                 MenuItem::make(VideoResource::class)->icon('video-camera'),
@@ -77,7 +77,7 @@ final class MoonShineLayout extends AppLayout
             ])->icon("academic-cap"),
 
 
-            MenuGroup::make("Yutuqlar", [
+            MenuGroup::make(__('messages.achievements'), [
                 MenuItem::make(ExamStatsResource::class)->icon('presentation-chart-line'),
                 MenuItem::make(AchievementResource::class)->icon('trophy'),
 

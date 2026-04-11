@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -452,131 +452,160 @@
             transform: rotate(0deg);
         }
 
-        nav {
-            position: relative;
-        }
-
-        nav ul {
+        /* Desktop Navigation styles */
+        /* Desktop Navigation styles */
+        .header-content {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
             gap: 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .main-nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-nav ul {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             list-style: none;
-            margin: 0;
-            padding: 0;
+            flex-wrap: nowrap;
         }
 
-        nav a {
-            color: var(--white);
+        .main-nav a {
+            color: white;
             text-decoration: none;
+            font-size: 0.85rem;
             font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: 9999px;
             transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            display: block;
+            white-space: nowrap;
         }
 
-        nav a:hover {
-            color: #b8d8ff;
+        @media (min-width: 1280px) {
+            .main-nav a {
+                font-size: 0.95rem;
+                padding: 0.5rem 1.25rem;
+            }
+            .main-nav ul {
+                gap: 1.5rem;
+            }
+        }
+
+        .lang-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
+            padding-left: 1.5rem;
+            margin-left: 0.5rem;
+        }
+
+        .lang-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: bold;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active-lang {
+            background-color: white;
+            color: #161179 !important;
+            border-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .main-nav {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex !important;
+            }
+            .logo-text {
+                font-size: 1.1rem;
+            }
         }
 
         /* Mobile Navigation Styles */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .mobile-menu-btn {
-                display: flex;
+                display: flex !important;
             }
 
             header {
                 position: relative;
             }
 
-            nav {
+            .main-nav {
                 position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
                 width: 100%;
-                background-color: var(--primary-color);
-                transform: translateY(-100%);
-                transition: transform 0.4s ease-in-out;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+                background-color: #161179;
+                transform: translateY(-110%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
                 z-index: 1001;
                 padding-top: 80px;
                 padding-bottom: 2rem;
                 max-height: 100vh;
                 overflow-y: auto;
+                display: block !important;
             }
 
-            nav.active {
+            .main-nav.active {
                 transform: translateY(0);
             }
 
-            nav ul {
+            .main-nav ul {
                 flex-direction: column;
                 gap: 0;
                 padding: 0 1rem;
             }
 
-            nav ul li {
+            .main-nav ul li {
                 width: 100%;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
 
-            nav ul li:last-child {
-                border-bottom: none;
-            }
-
-            nav a {
-                padding: 1rem;
+            .main-nav a {
+                padding: 1.25rem;
                 font-size: 1.1rem;
                 width: 100%;
+                border-radius: 0;
+                display: block;
             }
 
-            .logo {
-                flex: 1;
-                min-width: 0;
-            }
-
-            .logo img {
-                height: 50px;
-                width: auto;
+            .lang-container {
+                border-left: none;
+                margin-left: 0;
+                padding: 1.5rem;
+                justify-content: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
             }
 
             .logo-text {
                 font-size: 0.9rem;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-
-            .header-content {
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-text {
-                font-size: 0.75rem;
-            }
-
-            .logo img {
-                height: 40px;
-            }
-
-            .container {
-                padding: 0 0.5rem;
-            }
-
-            .mobile-menu-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 1.5rem;
-            }
-
-            nav {
-                padding-top: 70px;
-            }
-
-            nav a {
-                font-size: 1rem;
-                padding: 0.875rem;
             }
         }
 
@@ -748,25 +777,35 @@
 <body class="font-sans bg-gray-100">
     <!-- Navigation -->
     <header>
-        <div class="container">
+        <div class="px-4 md:px-8 max-w-[1600px] mx-auto">
             <div class="header-content">
                 <div class="logo">
-                    <img style="border-radius: 500px" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="yuksalish-maktabi-al-logo.jpeg">
-                    <div class="logo-text">Jizzax Shahar Yuksalish Maktabi</div>
+                    <img class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/20" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="logo">
+                    <div class="logo-text text-lg xl:text-xl font-bold tracking-tight">{{ __('messages.school_name') }}</div>
                 </div>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                     <i class="fas fa-bars menu-icon"></i>
                     <i class="fas fa-times close-icon"></i>
                 </button>
-                <nav id="mainNav">
+                <nav id="mainNav" class="main-nav">
                     <ul>
-                        <li><a href="{{route('home')}}">Home</a></li>
-                        <li><a href="{{route('about')}}">Maktab haqida</a></li>
-                        <!-- <li><a href="{{route('photo')}}">Yangiliklar</a></li> -->
-                        <li><a href="{{route('teachers')}}">O'qituvchilar</a></li>
-                        <li><a href="{{route('subject')}}">Dars jarayonlari</a></li>
-                        <li><a href="{{route('achievements')}}">Yutuqlar</a></li>
-                        <li><a href="{{route('contact')}}">Aloqa</a></li>
+                        <li><a href="{{route('home')}}" class="{{ request()->routeIs('home') ? 'active-link' : '' }}">{{ __('messages.home') }}</a></li>
+                        <li><a href="{{route('about')}}" class="{{ request()->routeIs('about') ? 'active-link' : '' }}">{{ __('messages.about') }}</a></li>
+                        <li><a href="{{route('teachers')}}" class="{{ request()->routeIs('teachers') ? 'active-link' : '' }}">{{ __('messages.teachers') }}</a></li>
+                        <li><a href="{{route('subject')}}" class="{{ request()->routeIs('subject') ? 'active-link' : '' }}">{{ __('messages.subjects') }}</a></li>
+                        <li><a href="{{route('achievements')}}" class="{{ request()->routeIs('achievements') ? 'active-link' : '' }}">{{ __('messages.achievements') }}</a></li>
+                        <li><a href="{{route('contact')}}" class="{{ request()->routeIs('contact') ? 'active-link' : '' }}">{{ __('messages.contact') }}</a></li>
+                        
+                        <li class="lang-container">
+                            <a href="{{ route('lang.switch', 'uz') }}" 
+                               class="lang-btn {{ app()->getLocale() == 'uz' ? 'active-lang' : '' }}">
+                                UZ
+                            </a>
+                            <a href="{{ route('lang.switch', 'ru') }}" 
+                               class="lang-btn {{ app()->getLocale() == 'ru' ? 'active-lang' : '' }}">
+                                RU
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -816,11 +855,66 @@
 
             // Handle window resize
             window.addEventListener('resize', function() {
-                if (window.innerWidth > 768) {
+                if (window.innerWidth > 1024) {
                     mainNav.classList.remove('active');
                     mobileMenuBtn.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             });
+
+            // Smooth Language Switch without full page refresh
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (this.classList.contains('active-lang')) {
+                        e.preventDefault();
+                        return;
+                    }
+                    
+                    e.preventDefault();
+                    const url = this.getAttribute('href');
+                    
+                    // Show premium loader
+                    const loader = document.getElementById('page-loader');
+                    loader.style.display = 'flex';
+                    loader.style.opacity = '1';
+
+                    // Use AJAX to change language AND fetch new content
+                    fetch(url, {
+                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        // After language is set, fetch the current page HTML
+                        return fetch(window.location.href);
+                    })
+                    .then(res => res.text())
+                    .then(html => {
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(html, 'text/html');
+                        
+                        // Swap the content
+                        document.body.innerHTML = doc.body.innerHTML;
+                        document.title = doc.title;
+                        
+                        // Hide loader after a small delay for smoothness
+                        setTimeout(() => {
+                           const newLoader = document.getElementById('page-loader');
+                           if(newLoader) newLoader.style.display = 'none';
+                        }, 500);
+
+                        // Important: Re-dispatch DOMContentLoaded if needed or reload if scripts break
+                        // In most cases with simple scripts, it works. If not, we do a quick window.location.reload()
+                        // but with the loader still visible so it looks like an AJAX update.
+                        window.location.reload(); 
+                    })
+                    .catch(err => {
+                        window.location.href = url;
+                    });
+                });
+            });
         });
     </script>
+
+    <div id="page-loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(22,17,121,0.1); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center;">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
+    </div>

@@ -28,9 +28,9 @@
         <div class="container mx-auto px-4">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-white mb-4">Muhtaram Ustozlarimiz</h2>
+                <h2 class="text-4xl font-bold text-white mb-4">{{ __('messages.our_teachers') }}</h2>
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mb-6"></div>
-                <p class="text-blue-100 max-w-2xl mx-auto">Akademik mukammallikni va shaxsiy o'sish tomon bizning talabalarga hidoyat ko'rsatuvchi bizning maxsus fakultet a'zolari bilan tanishish</p>
+                <p class="text-blue-100 max-w-2xl mx-auto">{{ __('messages.teachers_desc') }}</p>
             </div>
         </div>
     </section>
@@ -38,7 +38,7 @@
     <!-- Teachers Slider Section -->
     <section class="py-16 bg-gray-50">
         <div class="container mx-auto px-4">
-            <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">O‘qituvchilar jamoasi</h3>
+            <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">{{ __('messages.teacher_team') }}</h3>
 
             <div class="swiper teacherSwiper">
                 <div class="swiper-wrapper">
@@ -73,19 +73,19 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="text-center">
                     <div class="text-5xl font-bold text-blue-900 mb-2">{{ $stats->asosiy }}+</div>
-                    <div class="text-gray-600">Asosiy O‘qituvchi</div>
+                    <div class="text-gray-600">{{ __('messages.primary_teacher') }}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-5xl font-bold text-blue-900 mb-2">{{ $stats->ilmiy }}+</div>
-                    <div class="text-gray-600">Ilmiy darajasi bor o‘qituvchilar</div>
+                    <div class="text-gray-600">{{ __('messages.academic_degree') }}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-5xl font-bold text-blue-900 mb-2">{{ $stats->kutator }}+</div>
-                    <div class="text-gray-600">Kurator o‘qituvchi</div>
+                    <div class="text-gray-600">{{ __('messages.curator_teacher') }}</div>
                 </div>
                 <div class="text-center">
                     <div class="text-5xl font-bold text-blue-900 mb-2">{{ $stats->tashqi }}</div>
-                    <div class="text-gray-600">Tashqi o‘rindosh o‘qituvchilar</div>
+                    <div class="text-gray-600">{{ __('messages.external_teacher') }}</div>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
     <section class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-blue-900 mb-4">Bo‘limlarimiz</h2>
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">{{ __('messages.departments') }}</h2>
                 <div class="w-16 h-1 bg-blue-600 mx-auto mb-6"></div>
             </div>
 
