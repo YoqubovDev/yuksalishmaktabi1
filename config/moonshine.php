@@ -21,9 +21,9 @@ use MoonShine\Laravel\Pages\LoginPage;
 use MoonShine\Laravel\Pages\ProfilePage;
 
 return [
-    'title' => env('MOONSHINE_TITLE', 'MoonShine'),
-    'logo' => '/vendor/moonshine/logo-small.svg',
-    'logo_small' => '/vendor/moonshine/logo-small.svg',
+    'title' => env('MOONSHINE_TITLE', 'Sevinch - 475-chi sonli bolalar bog`chasi'),
+    'logo' => '/image/logo.png',
+    'logo_small' => '/image/logo.png',
 
 
     // Default flags

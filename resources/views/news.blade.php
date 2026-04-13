@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turin Akademik Litsey</title>
+    <title>Sevinch - 475-chi sonli bolalar bog`chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
@@ -571,19 +571,19 @@
 
     <!-- Hero Section -->
     <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Turin Akademik litseyiga xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Turin litseyi innovatsiya ta'limning mukammalligiga javob beradi</p>
+        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog`chasiga xush kelibsiz!</h1>
+        <p class="text-lg mt-4">Sevinch - 475-chi sonli bolalar bog`chasi innovatsiya ta'limning mukammalligiga javob beradi</p>
     </section>
 
     <!-- Statistics Section -->
     <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">422+</h2>
-            <p class="text-gray-600">Litsey Tahsil Oladigan O'qituvchilar</p>
+            <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Ishchilar</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">37+</h2>
-            <p class="text-gray-600">Malakali O'qituvchilar</p>
+            <p class="text-gray-600">Malakali Ishchilar</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">100%</h2>
@@ -600,7 +600,7 @@
                 </span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">So'nggi yangiliklar</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Maktabimizning so'nggi yangiliklari va tadbirlari bilan tanishing
+                    Bog'chamizning so'nggi yangiliklari va tadbirlari bilan tanishing
                 </p>
             </div>
 

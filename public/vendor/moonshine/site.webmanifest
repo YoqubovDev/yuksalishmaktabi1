@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Sevinch - 475-chi sonli bolalar bog`chasi",
+    "short_name": "Sevinch 475",
     "icons": [
         {
             "src": "android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#7843E9",
-    "background_color": "#7843E9",
+    "theme_color": "#161179",
+    "background_color": "#161179",
     "display": "standalone"
 }

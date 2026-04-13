@@ -1,0 +1,9 @@
+/* Hide MoonShine specific branding if any remains */
+.moonshine-logo {
+    display: none !important;
+}
+
+/* If the profile icon is a moon icon from heroicons or similar */
+.moonshine-user-avatar img[src*="moonshine"] {
+    display: none !important;
+}

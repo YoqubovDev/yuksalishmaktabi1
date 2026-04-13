@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html lang="<?php echo e(str_replace('_', '-', app()->getLocale())); ?>">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jizzax Shahar Yuksalish Maktabi</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="<?php echo e(asset('favicon.ico')); ?>" type="image/x-icon">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'unipix-blue': '#161179',
-                        'unipix-light': '#2a2a9e',
-                        'unipix-dark': '#0c0950',
-                        'turin-green': '#16A34A',
-                        'turin-dark': '#003366',
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Poppins', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'elegant': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -513,6 +481,22 @@
             margin-left: 0.5rem;
         }
 
+        .active-link {
+            background-color: white;
+            color: #161179 !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 1024px) {
+            .main-nav a.active-link {
+                background-color: rgba(255, 255, 255, 0.15);
+                color: white !important;
+                border-left: 4px solid white;
+                border-radius: 0;
+            }
+        }
+
+
         .lang-btn {
             width: 32px;
             height: 32px;
@@ -773,14 +757,13 @@
             .slider-img { width: 90vw; max-width: 300px; height: auto; }
         }
     </style>
-</head>
-<body class="font-sans bg-gray-100">
+
     <!-- Navigation -->
     <header>
         <div class="px-4 md:px-8 max-w-[1600px] mx-auto">
             <div class="header-content">
                 <div class="logo">
-                    <img class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/20" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="logo">
+                    <img class="w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/20" src="/image/logo.png" alt="logo">
                     <div class="logo-text text-lg xl:text-xl font-bold tracking-tight"><?php echo e(__('messages.school_name')); ?></div>
                 </div>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
@@ -813,27 +796,31 @@
     </header>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        function initNavigation() {
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mainNav = document.getElementById('mainNav');
+            if(!mobileMenuBtn || !mainNav) return;
+            
             const navLinks = mainNav.querySelectorAll('a');
 
             // Toggle menu on hamburger click
-            mobileMenuBtn.addEventListener('click', function() {
+            const handleMobileToggle = function() {
                 mainNav.classList.toggle('active');
                 mobileMenuBtn.classList.toggle('active');
-                // Prevent body scroll when menu is open
                 if (mainNav.classList.contains('active')) {
                     document.body.style.overflow = 'hidden';
                 } else {
                     document.body.style.overflow = '';
                 }
-            });
+            };
+            
+            mobileMenuBtn.removeEventListener('click', handleMobileToggle);
+            mobileMenuBtn.addEventListener('click', handleMobileToggle);
 
             // Close menu when clicking on a link (mobile)
             navLinks.forEach(link => {
                 link.addEventListener('click', function() {
-                    if (window.innerWidth <= 768) {
+                    if (window.innerWidth <= 1024) {
                         mainNav.classList.remove('active');
                         mobileMenuBtn.classList.remove('active');
                         document.body.style.overflow = '';
@@ -846,7 +833,7 @@
                 const isClickInsideNav = mainNav.contains(event.target);
                 const isClickOnButton = mobileMenuBtn.contains(event.target);
 
-                if (window.innerWidth <= 768 && !isClickInsideNav && !isClickOnButton && mainNav.classList.contains('active')) {
+                if (window.innerWidth <= 1024 && !isClickInsideNav && !isClickOnButton && mainNav.classList.contains('active')) {
                     mainNav.classList.remove('active');
                     mobileMenuBtn.classList.remove('active');
                     document.body.style.overflow = '';
@@ -861,6 +848,10 @@
                     document.body.style.overflow = '';
                 }
             });
+        }
+
+        document.addEventListener('DOMContentLoaded', initNavigation);
+
 
             // Smooth Language Switch without full page refresh
             document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -879,40 +870,75 @@
                     loader.style.opacity = '1';
 
                     // Use AJAX to change language AND fetch new content
-                    fetch(url, {
-                        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        // After language is set, fetch the current page HTML
-                        return fetch(window.location.href);
-                    })
-                    .then(res => res.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        
-                        // Swap the content
-                        document.body.innerHTML = doc.body.innerHTML;
-                        document.title = doc.title;
-                        
-                        // Hide loader after a small delay for smoothness
-                        setTimeout(() => {
-                           const newLoader = document.getElementById('page-loader');
-                           if(newLoader) newLoader.style.display = 'none';
-                        }, 500);
+            // Smooth Language Switch without full page refresh
+            document.addEventListener('click', function(e) {
+                const btn = e.target.closest('.lang-btn');
+                if (!btn) return;
+                
+                if (btn.classList.contains('active-lang')) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                e.preventDefault();
+                const url = btn.getAttribute('href');
+                
+                // Show premium loader
+                const loader = document.getElementById('page-loader');
+                if(loader) {
+                    loader.style.display = 'flex';
+                    loader.style.opacity = '1';
+                }
 
-                        // Important: Re-dispatch DOMContentLoaded if needed or reload if scripts break
-                        // In most cases with simple scripts, it works. If not, we do a quick window.location.reload()
-                        // but with the loader still visible so it looks like an AJAX update.
-                        window.location.reload(); 
-                    })
-                    .catch(err => {
-                        window.location.href = url;
+                // Fade out current body
+                document.body.style.opacity = '0.5';
+                document.body.style.transition = 'opacity 0.3s ease';
+
+                fetch(url, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                })
+                .then(res => res.json())
+                .then(data => {
+                    return fetch(window.location.href);
+                })
+                .then(res => res.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    // Swap the content
+                    document.body.innerHTML = doc.body.innerHTML;
+                    document.title = doc.title;
+                    
+                    // Re-execute scripts
+                    const scripts = document.body.querySelectorAll('script');
+                    scripts.forEach(oldScript => {
+                        const newScript = document.createElement('script');
+                        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                        if (oldScript.src) {
+                            newScript.src = oldScript.src;
+                        } else {
+                            newScript.textContent = oldScript.textContent;
+                        }
+                        oldScript.parentNode.replaceChild(newScript, oldScript);
                     });
+
+                    // Re-init core components
+                    initNavigation();
+                    
+                    // Fade back in
+                    document.body.style.opacity = '1';
+                    
+                    // Hide loader
+                    setTimeout(() => {
+                       const newLoader = document.getElementById('page-loader');
+                       if(newLoader) newLoader.style.display = 'none';
+                    }, 300);
+                })
+                .catch(err => {
+                    window.location.href = url;
                 });
             });
-        });
     </script>
 
     <div id="page-loader" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(22,17,121,0.1); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center;">

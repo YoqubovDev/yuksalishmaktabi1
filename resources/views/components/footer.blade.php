@@ -5,13 +5,13 @@
             <!-- Logo Section -->
             <div class="flex items-center mb-6 md:mb-0">
                 <div class="mr-6">
-                    <div class="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center bg-white bg-opacity-10 backdrop-blur-sm">
-                        <div class="text-2xl font-serif font-bold text-white">YM</div>
+                    <div class="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center bg-white overflow-hidden">
+                        <img src="/image/logo.png" alt="logo" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div>
-                    <div class="text-3xl font-serif font-bold text-white">Yuksalish</div>
-                    <div class="text-sm tracking-widest text-gray-300">Yuksalish maktabi</div>
+                    <div class="text-3xl font-serif font-bold text-white">Sevinch - 475</div>
+                    <div class="text-sm tracking-widest text-gray-300">Sevinch - 475-chi sonli bolalar bog`chasi</div>
                 </div>
             </div>
 
@@ -46,10 +46,10 @@
         <div>
             <h3 class="text-xl font-bold mb-6 relative">
                 <span class="bg-unipix-light h-1 w-8 absolute -bottom-2 left-0"></span>
-                Yuksalish maktabi haqida
+                Sevinch - 475-chi sonli bolalar bog`chasi haqida
             </h3>
             <p class="text-gray-300 mb-6 leading-relaxed">
-                Jizzax Yuksalish maktabi nufuzli ta'lim muassasasi bo'lib, zamonaviy ta'lim va innovatsion yondashuvlarga asoslangan.
+                Jizzax Sevinch - 475-chi sonli bolalar bog`chasi nufuzli ta'lim muassasasi bo'lib, zamonaviy ta'lim va innovatsion yondashuvlarga asoslangan.
             </p>
             <div class="flex space-x-3 mt-4">
                 <a href="#" class="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-unipix-light transition-colors duration-300">
@@ -96,7 +96,7 @@
                 Aloqada qoling
             </h3>
             <p class="text-gray-300 mb-6">
-                 Jizzax shahridagi Yuksalish maktabimiz haqida yangiliklar, tadbirlar va e’lonnardan xabardor bo‘lish uchun obuna bo‘ling.
+                 Jizzax shahridagi Sevinch - 475-chi sonli bolalar bog`chamiz haqida yangiliklar, tadbirlar va e’lonnardan xabardor bo‘lish uchun obuna bo‘ling.
             </p>
             <div class="flex justify-between items-center">
                 <p class="text-gray-400 text-sm">
@@ -114,7 +114,7 @@
     <div class="container mx-auto mt-12 pt-6 border-t border-gray-800 px-6">
         <div class="flex flex-col md:flex-row justify-between items-center">
             <p class="text-gray-400 mb-4 md:mb-0">
-                © 2025 Jizzax shahridagi Yuksalish maktabimiz. Barcha huquqlar himoyalangan.
+                © 2025 Jizzax shahridagi Sevinch - 475-chi sonli bolalar bog`chamiz. Barcha huquqlar himoyalangan.
             </p>
             <div class="flex space-x-6">
                 <a href="#" class="text-gray-400 hover:text-white transition-colors duration-300 text-sm">Maxfiylik siyosati</a>

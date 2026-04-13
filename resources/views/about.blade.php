@@ -2,8 +2,8 @@
 
     <!-- Hero Section -->
     <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Jizzax Shahar Yuksalish maktabiga xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Jizzax Shahar Yuksalish Maktabi innovatsiya ta'limning mukammalligiga javob beradi</p>
+        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog`chasi xush kelibsiz!</h1>
+        <p class="text-lg mt-4">Sevinch - 475-chi sonli bolalar bog`chasi innovatsiya ta'limning mukammalligiga javob beradi</p>
     </section>
 
     <!-- Statistics Section -->
@@ -24,12 +24,12 @@
 <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
         <h2 class="text-4xl font-bold text-blue-900">{{ $stat->students_count }}+</h2>
-        <p class="text-gray-600">Maktabda Tahsil Oladigan O'qituvchilar</p>
+        <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Ishchilar</p>
     </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
         <h2 class="text-4xl font-bold text-blue-900">{{ $stat->qualified_teachers }}+</h2>
-        <p class="text-gray-600">Malakali O'qituvchilar</p>
+        <p class="text-gray-600">Malakali Ishchilar</p>
     </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
@@ -48,7 +48,7 @@
             </span>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">So'nggi yangiliklar</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Maktabimizning so'nggi yangiliklari va tadbirlari bilan tanishing
+                    Bog'chamizning so'nggi yangiliklari va tadbirlari bilan tanishing
                 </p>
             </div>
 

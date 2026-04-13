@@ -2,11 +2,11 @@
 
 return [
     'home' => 'Home',
-    'about' => 'About School',
-    'teachers' => 'Teachers',
-    'subjects' => 'Subjects',
+    'about' => 'About Kindergarten',
+    'teachers' => 'Staff',
+    'subjects' => 'Ongoing Activities',
     'achievements' => 'Achievements',
     'contact' => 'Contact',
     'news' => 'News',
-    'school_name' => 'Jizzakh City Yuksalish School',
+    'school_name' => 'Sevinch - 475-chi sonli bolalar bog`chasi',
 ];

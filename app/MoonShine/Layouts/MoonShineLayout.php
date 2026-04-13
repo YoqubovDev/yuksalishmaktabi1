@@ -26,6 +26,7 @@ use App\MoonShine\Resources\Video\VideoResource;
 use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
 use App\MoonShine\Resources\ExamStats\ExamStatsResource;
+use MoonShine\AssetManager\Css;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -33,11 +34,17 @@ final class MoonShineLayout extends AppLayout
      * @var null|class-string<PaletteContract>
      */
     protected ?string $palette = PurplePalette::class;
+ 
+    public function favicon(): string
+    {
+        return '/image/logo.png';
+    }
 
     protected function assets(): array
     {
         return [
             ...parent::assets(),
+            Css::make('/css/custom_admin.css'),
         ];
     }
 

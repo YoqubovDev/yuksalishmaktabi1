@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Jizzax Shahar Yuksalish maktabi</title>
+  <title> Sevinch - 475-chi sonli bolalar bog`chasi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -663,7 +663,7 @@
         }
     </style>
 </head>
-<body x-data @keydown.escape.window="$store.modal?.showModal = false">
+<body x-data @keydown.escape.window="if ($store.modal) $store.modal.showModal = false">
   <?php if (isset($component)) { $__componentOriginalfd1f218809a441e923395fcbf03e4272 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginalfd1f218809a441e923395fcbf03e4272 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.header','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -684,57 +684,7 @@
 <?php unset($__componentOriginalfd1f218809a441e923395fcbf03e4272); ?>
 <?php endif; ?>
 
-  <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-          const mainNav = document.getElementById('mainNav');
-          const navLinks = mainNav.querySelectorAll('a');
 
-          // Toggle menu on hamburger click
-          mobileMenuBtn.addEventListener('click', function() {
-              mainNav.classList.toggle('active');
-              mobileMenuBtn.classList.toggle('active');
-              // Prevent body scroll when menu is open
-              if (mainNav.classList.contains('active')) {
-                  document.body.style.overflow = 'hidden';
-              } else {
-                  document.body.style.overflow = '';
-              }
-          });
-
-          // Close menu when clicking on a link (mobile)
-          navLinks.forEach(link => {
-              link.addEventListener('click', function() {
-                  if (window.innerWidth <= 768) {
-                      mainNav.classList.remove('active');
-                      mobileMenuBtn.classList.remove('active');
-                      document.body.style.overflow = '';
-                  }
-              });
-          });
-
-          // Close menu when clicking outside (mobile)
-          document.addEventListener('click', function(event) {
-              const isClickInsideNav = mainNav.contains(event.target);
-              const isClickOnButton = mobileMenuBtn.contains(event.target);
-
-              if (window.innerWidth <= 768 && !isClickInsideNav && !isClickOnButton && mainNav.classList.contains('active')) {
-                  mainNav.classList.remove('active');
-                  mobileMenuBtn.classList.remove('active');
-                  document.body.style.overflow = '';
-              }
-          });
-
-          // Handle window resize
-          window.addEventListener('resize', function() {
-              if (window.innerWidth > 768) {
-                  mainNav.classList.remove('active');
-                  mobileMenuBtn.classList.remove('active');
-                  document.body.style.overflow = '';
-              }
-          });
-      });
-  </script>
 
   <!-- Hero Slider Section -->
   <section class="main-slider">
@@ -840,18 +790,18 @@
       <div class="bg-white rounded-lg shadow-lg p-8">
         <h2 class="text-4xl font-bold text-unipix-blue text-center mb-8"><?php echo e(__('messages.about_us')); ?></h2>
         <p class="text-gray-600 text-lg mb-6">
-            Yuksalish maktabi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat talabalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
+            Sevinch - 475-chi sonli bolalar bog`chasi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat talabalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.advantages')); ?></h3>
         <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
-          <li><strong>Professional o'qituvchilar:</strong>Maktabimiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
+          <li><strong>Professional tarbiyachilar:</strong>Bog'chamiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
           <li><strong>Innovatsion metodologiyalar:</strong> O'qitish zamonaviy texnologiyalar va interfaol ta'lim usullaridan foydalangan holda amalga oshiriladi.</li>
           <li><strong>Amaliy o'quv jarayoni:</strong> Haqiqiy loyihalar va amaliy mashg'ulotlar orqali nazariy bilimlarni mustahkamlash imkoniyati.</li>
           <li><strong>Global yondashuv:</strong> Talabalarga xalqaro standartlarga javob beradigan bilim va ko'nikmalar beriladi.</li>
         </ul>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.history')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
-            2023 yilda tashkil etilgan Jizzax shahridagi Yuksalish maktab O'zbekiston yoshlariga sifatli ta'lim berish maqsadida tashkil etilgan. 450 nafar o'quvchiga mo'ljallangan  maktabi milliy ta'lim standartlariga asoslangan zamonaviy o'quv muhitini taklif etadi. U talabalarni fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha qat'iy dasturlar orqali tayyorlaydi. Qabul ingliz tilidagi rasmiy intervyu bilan bir qatorda matematika, fizika va ingliz tilidagi test natijalariga asoslanadi. Yuksalish maktabi o'quvchilarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi martabalariga erishishda g'urur bilan qo'llab-quvvatlaydi.
+            2023 yilda tashkil etilgan Jizzax shahridagi Sevinch - 475-chi sonli bolalar bog`chasi O'zbekiston yoshlariga sifatli ta'lim-tarbiya berish maqsadida tashkil etilgan. 475 nafar o'quvchiga mo'ljallangan  boqcha milliy ta'lim standartlariga asoslangan zamonaviy tarbiya muhitini taklif etadi. U bolalarni fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha qat'iy dasturlar orqali tayyorlaydi. Qabul ingliz tilidagi rasmiy intervyu bilan bir qatorda matematika, fizika va ingliz tilidagi test natijalariga asoslanadi. Sevinch - 475-chi sonli bolalar bog`chasi o'quvchilarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi martabalariga erishishda g'urur bilan qo'llab-quvvatlaydi.
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.mission')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
@@ -862,7 +812,7 @@
   </section>
 
   <!-- Team Section -->
-  <section class="py-16 bg-gray-50">
+  <section class="py-16 bg-gray-50" x-data="{ showTeacherModal: false, selectedTeacher: {}, showImageModal: false, fullImageUrl: '' }">
       <div class="container mx-auto px-4">
           <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center"><?php echo e(__('messages.leadership')); ?></h3>
 
@@ -870,7 +820,7 @@
               <div class="swiper-wrapper">
                   <?php $__currentLoopData = $homes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $home): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                       <div class="swiper-slide">
-                          <div class="bg-white shadow-xl rounded-3xl p-6 text-center max-w-xs mx-auto hover:scale-105 transition-transform duration-300">
+                          <div @click="selectedTeacher = { name: '<?php echo e(addslashes($home->name)); ?>', subject: '<?php echo e(addslashes($home->subject)); ?>', bio: '<?php echo e(str_replace(["\r", "\n"], ['\r', '\n'], addslashes($home->bio))); ?>', image: '<?php echo e(asset('storage/' . $home->image)); ?>' }; showTeacherModal = true" class="bg-white shadow-xl rounded-3xl p-6 text-center max-w-xs mx-auto hover:scale-105 transition-transform duration-300 cursor-pointer">
                               <div class="w-28 h-28 mx-auto mb-4">
                                   <img src="<?php echo e(asset('storage/' . $home->image)); ?>"
                                        class="w-full h-full object-cover rounded-full border-4 border-blue-200"
@@ -878,11 +828,86 @@
                               </div>
                               <h4 class="text-xl font-semibold text-blue-900"><?php echo e($home->name); ?></h4>
                               <p class="text-blue-600 font-medium"><?php echo e($home->subject); ?></p>
-                              <p class="text-gray-600 text-sm mt-2"><?php echo e($home->bio); ?></p>
+                              <p class="text-gray-600 text-sm mt-2 line-clamp-3"><?php echo e($home->bio); ?></p>
                           </div>
                       </div>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
               </div>
+          </div>
+      </div>
+
+      <!-- Teacher Modal -->
+      <div x-show="showTeacherModal" 
+           style="display: none;" 
+           class="fixed inset-0 z-40 overflow-y-auto" 
+           aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+              
+              <div x-show="showTeacherModal" 
+                   x-transition:enter="ease-out duration-300" 
+                   x-transition:enter-start="opacity-0" 
+                   x-transition:enter-end="opacity-100" 
+                   x-transition:leave="ease-in duration-200" 
+                   x-transition:leave-start="opacity-100" 
+                   x-transition:leave-end="opacity-0" 
+                   class="fixed inset-0 bg-black bg-opacity-75 transition-opacity" 
+                   @click="showTeacherModal = false" aria-hidden="true"></div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+              <div x-show="showTeacherModal" 
+                   x-transition:enter="ease-out duration-300" 
+                   x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                   x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                   x-transition:leave="ease-in duration-200" 
+                   x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+                   x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                   class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full">
+                  
+                  <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 relative">
+                      <button @click="showTeacherModal = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                          <i class="fas fa-times text-2xl"></i>
+                      </button>
+                      <div class="sm:flex sm:items-start flex-col sm:flex-row items-center sm:items-start">
+                          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-32 w-32 rounded-full sm:mx-0 border-4 border-blue-100 overflow-hidden mb-4 sm:mb-0 relative group cursor-pointer" @click="showImageModal = true; fullImageUrl = selectedTeacher.image">
+                              <img :src="selectedTeacher.image" class="w-full h-full object-cover" alt="Profile">
+                              <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                  <i class="fas fa-expand text-white text-xl"></i>
+                              </div>
+                          </div>
+                          <div class="text-center sm:mt-0 sm:ml-6 sm:text-left flex-1 min-w-0">
+                              <h3 class="text-2xl leading-6 font-bold text-blue-900 mb-2 truncate" id="modal-title" x-text="selectedTeacher.name"></h3>
+                              <p class="text-md text-blue-600 font-semibold border-b pb-3 mb-3 border-gray-100 truncate" x-text="selectedTeacher.subject"></p>
+                              <div class="mt-2 text-gray-600 modal-bio-container max-h-60 overflow-y-auto pr-2">
+                                  <p class="text-sm leading-relaxed whitespace-pre-wrap" x-text="selectedTeacher.bio"></p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-100">
+                      <button type="button" @click="showTeacherModal = false" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-blue-900 text-base font-medium text-white hover:bg-blue-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-300">
+                          Yopish
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Full Image Modal -->
+      <div x-show="showImageModal" 
+           style="display: none;" 
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90"
+           x-transition:enter="ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100"
+           x-transition:leave="ease-in duration-200"
+           x-transition:leave-start="opacity-100"
+           x-transition:leave-end="opacity-0">
+          <button @click="showImageModal = false" class="absolute top-4 right-6 text-white text-4xl hover:text-gray-300 focus:outline-none z-50">
+              &times;
+          </button>
+          <div class="relative w-full h-full flex items-center justify-center p-4">
+              <img :src="fullImageUrl" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl" alt="Full Image" @click.away="showImageModal = false">
           </div>
       </div>
   </section>
