@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('home_sliders', function (Blueprint $table) {
-            //
+            $table->foreignId('staff_category_id')->nullable()->constrained('staff_categories')->onDelete('set null');
         });
     }
 
@@ -22,7 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('home_sliders', function (Blueprint $table) {
-            //
+            $table->dropForeign(['staff_category_id']);
+            $table->dropColumn('staff_category_id');
         });
     }
 };

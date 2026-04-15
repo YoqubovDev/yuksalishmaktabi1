@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TeacherStats extends Model
 {
+    protected $table = 'teachers_stats';
+
     protected $fillable = [
-        'asosiy', 'ilmiy', 'bosh', 'kurator'
+        'asosiy', 'ilmiy', 'kurator', 'tashqi'
     ];
 }

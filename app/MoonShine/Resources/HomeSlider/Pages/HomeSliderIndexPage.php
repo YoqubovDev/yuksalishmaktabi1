@@ -15,6 +15,9 @@ use App\MoonShine\Resources\HomeSlider\HomeSliderResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use App\MoonShine\Resources\StaffCategory\StaffCategoryResource;
+use App\Models\StaffCategory;
 use Throwable;
 
 
@@ -32,9 +35,10 @@ class HomeSliderIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Ism', 'name'),
-            Text::make('Fan', 'subject'),
             Image::make('Rasm', 'image'),
+            Text::make('Ism', 'name'),
+            BelongsTo::make('Kategoriya', 'staffCategory', formatted: static fn (StaffCategory $model) => $model->name, resource: StaffCategoryResource::class),
+            Text::make('Fan / Lavozim', 'subject'),
         ];
     }
 

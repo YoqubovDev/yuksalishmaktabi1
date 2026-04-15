@@ -10,9 +10,8 @@ class HomeSliderController extends Controller
 {
     public function index()
     {
-        $homes = HomeSlider::all();
+        $homes = HomeSlider::with(['staffCategory', 'teacherOfGroups.students', 'teacherOfGroups.assistant', 'assistantOfGroups'])->get();
         $qabulrasmis = Reception::latest()->get();
-        return view('home', compact('qabulrasmis','homes'));
-
+        return view('home', compact('qabulrasmis', 'homes'));
     }
 }

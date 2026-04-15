@@ -16,6 +16,9 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use App\Models\HomeSlider;
+use App\MoonShine\Resources\HomeSlider\HomeSliderResource;
 use Throwable;
 
 
@@ -35,6 +38,8 @@ class GroupIndexPage extends IndexPage
             ID::make()->sortable(),
             Text::make('Nomi', 'name'),
             Text::make('Yonalish' ,'direction')->required(),
+            BelongsTo::make('Tarbiyachi', 'teacher', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class),
+            BelongsTo::make('Yordamchi', 'assistant', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class),
             Text::make('Oquvchi soni' ,'schedule_image'),
             Number::make('Natija foizi', 'result_percentage')->nullable(),
             Image::make(' Guruh Rasmi ', 'image'),

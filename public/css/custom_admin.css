@@ -7,3 +7,7 @@
 .moonshine-user-avatar img[src*="moonshine"] {
     display: none !important;
 }
+
+.layout-footer, footer {
+    display: none !important;
+}

@@ -16,7 +16,9 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Text;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use App\MoonShine\Resources\HomeSlider\HomeSliderResource;
+use App\Models\HomeSlider;
 use Throwable;
 
 
@@ -37,6 +39,8 @@ class GroupFormPage extends FormPage
                 Text::make('Yonalish', 'direction')->required(),
                 Text::make('Oquvchilar soni', 'schedule_image')->required(),
                 Number::make('Natija foizi', 'result_percentage')->nullable(),
+                BelongsTo::make('Tarbiyachi', 'teacher', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class)->nullable(),
+                BelongsTo::make('Yordamchi Tarbiyachi', 'assistant', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class)->nullable(),
                 Image::make('Guruh Rasmi ', 'image')->dir('groups')->removable()->required()
                     ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),
             ]),

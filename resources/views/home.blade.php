@@ -791,28 +791,80 @@
   </section>
 
   <!-- Team Section -->
-  <section class="py-16 bg-gray-50" x-data="{ showTeacherModal: false, selectedTeacher: {}, showImageModal: false, fullImageUrl: '' }">
+  <section class="py-16 bg-gray-50" x-data="{ 
+      showTeacherModal: false, 
+      selectedTeacher: { group: null }, 
+      showImageModal: false, 
+      fullImageUrl: '', 
+      showGroupModal: false, 
+      selectedGroup: { students: [], assistant: {} },
+      showStudentModal: false,
+      selectedStudent: {}
+  }">
       <div class="container mx-auto px-4">
           <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">{{ __('messages.leadership') }}</h3>
 
-          <div class="swiper teacherSwiper">
-              <div class="swiper-wrapper">
-                  @foreach($homes as $home)
-                      <div class="swiper-slide">
-                          <div @click="selectedTeacher = { name: '{{ addslashes($home->name) }}', subject: '{{ addslashes($home->subject) }}', bio: '{{ str_replace(["\r", "\n"], ['\r', '\n'], addslashes($home->bio)) }}', image: '{{ asset('storage/' . $home->image) }}' }; showTeacherModal = true" class="bg-white shadow-xl rounded-3xl p-6 text-center max-w-xs mx-auto hover:scale-105 transition-transform duration-300 cursor-pointer">
-                              <div class="w-28 h-28 mx-auto mb-4">
-                                  <img src="{{ asset('storage/' . $home->image) }}"
-                                       class="w-full h-full object-cover rounded-full border-4 border-blue-200"
-                                       alt="Teacher">
+          @php
+              $tarbiyachilar = $homes->filter(function($item) {
+                  return $item->staffCategory && (
+                      str_contains(strtolower($item->staffCategory->name), 'tarbiya') || 
+                      str_contains(strtolower($item->staffCategory->name), 'o\'qituvchi')
+                  );
+              });
+              
+              $groupedHomes = $tarbiyachilar->groupBy(function($item) {
+                  return $item->staffCategory ? $item->staffCategory->name : 'Tarbiyachilar';
+              });
+          @endphp
+
+          @foreach($groupedHomes as $categoryName => $categoryHomes)
+          <div class="mb-12">
+              <h4 class="text-2xl font-bold text-blue-800 mb-6 border-b-2 border-blue-200 inline-block pb-2">{{ $categoryName }}</h4>
+
+              <div class="swiper teacherSwiper">
+                  <div class="swiper-wrapper">
+                      @foreach($categoryHomes as $home)
+                          @php
+                              $group = $home->teacherOfGroups->first();
+                              $groupJson = 'null';
+                              if ($group) {
+                                  $groupJson = json_encode([
+                                      'name' => $group->name,
+                                      'direction' => $group->direction,
+                                      'assistant_name' => $group->assistant ? $group->assistant->name : 'Noma\'lum',
+                                      'students' => $group->students->map(fn($s) => [
+                                          'name' => $s->name,
+                                          'image' => asset('storage/' . $s->image),
+                                          'bio' => $s->bio,
+                                          'group_name' => $group->name
+                                      ])
+                                  ]);
+                              }
+                          @endphp
+                          <div class="swiper-slide py-4">
+                              <div @click="selectedTeacher = { 
+                                      name: '{{ addslashes($home->name) }}', 
+                                      subject: '{{ addslashes($home->subject) }}', 
+                                      bio: '{{ str_replace(["\r", "\n"], ['\r', '\n'], addslashes($home->bio)) }}', 
+                                      image: '{{ asset('storage/' . $home->image) }}',
+                                      group: {{ $groupJson }}
+                                  }; showTeacherModal = true" class="bg-white shadow-lg rounded-3xl p-6 text-center max-w-xs mx-auto hover:scale-105 transition-transform duration-300 cursor-pointer border border-gray-100">
+                                  <div class="w-28 h-28 mx-auto mb-4">
+                                      <img src="{{ asset('storage/' . $home->image) }}"
+                                           class="w-full h-full object-cover rounded-full border-4 border-blue-200"
+                                           alt="Teacher">
+                                  </div>
+                                  <h4 class="text-xl font-semibold text-blue-900">{{$home->name}}</h4>
+                                  <p class="text-blue-600 font-medium">{{$home->subject}}</p>
+                                  <p class="text-gray-600 text-sm mt-2 line-clamp-3">{{$home->bio}}</p>
                               </div>
-                              <h4 class="text-xl font-semibold text-blue-900">{{$home->name}}</h4>
-                              <p class="text-blue-600 font-medium">{{$home->subject}}</p>
-                              <p class="text-gray-600 text-sm mt-2 line-clamp-3">{{$home->bio}}</p>
                           </div>
-                      </div>
-                  @endforeach
+                      @endforeach
+                  </div>
               </div>
           </div>
+          @endforeach
+
       </div>
 
       <!-- Teacher Modal -->
@@ -863,11 +915,109 @@
                           </div>
                       </div>
                   </div>
-                  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-100">
+                  <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-gray-100 gap-2">
                       <button type="button" @click="showTeacherModal = false" class="w-full inline-flex justify-center rounded-xl border border-transparent shadow-sm px-4 py-2 bg-blue-900 text-base font-medium text-white hover:bg-blue-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-300">
                           Yopish
                       </button>
+                      <button x-show="selectedTeacher.group" type="button" @click="selectedGroup = selectedTeacher.group; showGroupModal = true; showTeacherModal = false" class="w-full inline-flex justify-center rounded-xl border border-blue-900 shadow-sm px-4 py-2 bg-white text-base font-medium text-blue-900 hover:bg-blue-50 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-300">
+                          Guruh
+                      </button>
                   </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Group Details Modal -->
+      <div x-show="showGroupModal" 
+           style="display: none;" 
+           class="fixed inset-0 z-40 overflow-y-auto" 
+           aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+              <div x-show="showGroupModal" 
+                   x-transition:enter="ease-out duration-300" 
+                   x-transition:enter-start="opacity-0" 
+                   x-transition:enter-end="opacity-100" 
+                   x-transition:leave="ease-in duration-200" 
+                   x-transition:leave-start="opacity-100" 
+                   x-transition:leave-end="opacity-0" 
+                   class="fixed inset-0 bg-black bg-opacity-75 transition-opacity" 
+                   @click="showGroupModal = false" aria-hidden="true"></div>
+
+              <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+              <div x-show="showGroupModal" 
+                   x-transition:enter="ease-out duration-300" 
+                   x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+                   x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+                   class="inline-block align-middle bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-4xl w-full">
+                  
+                  <div class="bg-blue-900 px-6 py-4 flex justify-between items-center text-white">
+                      <div>
+                        <h3 class="text-2xl font-bold" x-text="selectedGroup.name + ' guruhi'"></h3>
+                        <p class="text-blue-100 text-sm" x-text="'Yordamchi tarbiyachi: ' + selectedGroup.assistant_name"></p>
+                      </div>
+                      <button @click="showGroupModal = false" class="text-white hover:text-blue-200 transition-colors">
+                          <i class="fas fa-times text-2xl"></i>
+                      </button>
+                  </div>
+
+                  <div class="p-6 bg-gray-50">
+                      <h4 class="text-lg font-semibold text-blue-900 mb-4 border-b pb-2">Guruhdagi bolalar</h4>
+                      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <template x-for="(student, index) in selectedGroup.students" :key="index">
+                              <div @click="selectedStudent = student; showStudentModal = true" class="bg-white p-2 rounded-2xl shadow hover:shadow-md transition-shadow cursor-pointer text-center group">
+                                  <div class="aspect-square rounded-xl overflow-hidden mb-2">
+                                      <img :src="student.image" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" :alt="student.name">
+                                  </div>
+                                  <p class="text-xs font-semibold text-blue-900 truncate" x-text="student.name"></p>
+                              </div>
+                          </template>
+                      </div>
+                      <div x-show="selectedGroup.students.length === 0" class="text-center py-10 text-gray-400">
+                          Bolalar malumoti kiritilmagan
+                      </div>
+                  </div>
+
+                  <div class="bg-white px-6 py-4 flex justify-end border-t">
+                      <button @click="showGroupModal = false; showTeacherModal = true" class="mr-auto text-blue-600 font-medium hover:underline">
+                          <i class="fas fa-arrow-left mr-1"></i> Orqaga
+                      </button>
+                      <button @click="showGroupModal = false" class="bg-blue-900 text-white px-6 py-2 rounded-xl hover:bg-blue-800 transition-colors">
+                          Yopish
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- Student Detail Modal -->
+      <div x-show="showStudentModal" 
+           style="display: none;" 
+           class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80 p-4"
+           x-transition:enter="ease-out duration-300"
+           x-transition:enter-start="opacity-0"
+           x-transition:enter-end="opacity-100">
+          
+          <div @click.away="showStudentModal = false" class="bg-white rounded-3xl overflow-hidden max-w-sm w-full shadow-2xl transform transition-all">
+              <div class="relative aspect-square cursor-pointer" @click="showImageModal = true; fullImageUrl = selectedStudent.image">
+                  <img :src="selectedStudent.image" class="w-full h-full object-cover" alt="Student">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                      <div class="text-white">
+                          <h4 class="text-2xl font-bold" x-text="selectedStudent.name"></h4>
+                          <p class="text-blue-100" x-text="selectedStudent.group_name + ' guruhi'"></p>
+                      </div>
+                  </div>
+                  <button @click="showStudentModal = false" class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-white/40 transition-colors">
+                      <i class="fas fa-times"></i>
+                  </button>
+              </div>
+              <div class="p-6">
+                  <h5 class="text-gray-400 uppercase text-xs font-bold tracking-widest mb-2">Haqida</h5>
+                  <p class="text-gray-700 leading-relaxed" x-text="selectedStudent.bio || 'Malumot berilmagan'"></p>
+                  
+                  <button @click="showStudentModal = false" class="mt-6 w-full bg-blue-900 text-white py-3 rounded-2xl font-bold hover:bg-blue-800 transition-colors">
+                      Yopish
+                  </button>
               </div>
           </div>
       </div>

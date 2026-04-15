@@ -579,11 +579,11 @@
     <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">422+</h2>
-            <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Ishchilar</p>
+            <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Hodimlar</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">37+</h2>
-            <p class="text-gray-600">Malakali Ishchilar</p>
+            <p class="text-gray-600">Malakali Hodimlar</p>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
             <h2 class="text-4xl font-bold text-blue-900">100%</h2>

@@ -17,6 +17,9 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
+use App\MoonShine\Resources\StaffCategory\StaffCategoryResource;
+use App\Models\StaffCategory;
 use Throwable;
 
 
@@ -34,7 +37,8 @@ class HomeSliderFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Ism', 'name')->required(),
-                Text::make('Fan', 'subject')->required(),
+                BelongsTo::make('Kategoriya', 'staffCategory', formatted: static fn (StaffCategory $model) => $model->name, resource: StaffCategoryResource::class)->nullable(),
+                Text::make('Fan / Lavozim', 'subject')->required(),
                 Image::make('Rasm', 'image')
                     ->dir('homeslider') // storage/app/public/homeslider
                     ->disk('public')

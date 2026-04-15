@@ -1,0 +1,2 @@
+<textarea <?php echo e($attributes->merge(['class' => 'form-textarea'])); ?>><?php echo e($slot ?? ''); ?></textarea>
+<?php /**PATH /home/shehroz/Projects/example-app/vendor/moonshine/moonshine/src/UI/resources/views/components/form/textarea.blade.php ENDPATH**/ ?>

@@ -27,6 +27,7 @@ use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
 use App\MoonShine\Resources\ExamStats\ExamStatsResource;
 use MoonShine\AssetManager\Css;
+use App\MoonShine\Resources\StaffCategory\StaffCategoryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -100,6 +101,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(SliderResource::class),
 
             ])->icon("wrench-screwdriver"),
+            MenuItem::make(StaffCategoryResource::class, 'StaffCategories'),
         ];
     }
 
@@ -111,5 +113,10 @@ final class MoonShineLayout extends AppLayout
         parent::colors($colorManager);
 
         // $colorManager->primary('#00000');
+    }
+
+    protected function footer(): array
+    {
+        return [];
     }
 }
