@@ -11,11 +11,12 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Group\GroupResource;
-use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
-use MoonShine\UI\Components\Layout\Box;
+use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Components\Layout\Box;
+use MoonShine\Support\ListOf;
 use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use App\MoonShine\Resources\HomeSlider\HomeSliderResource;
 use App\Models\HomeSlider;
@@ -36,8 +37,7 @@ class GroupFormPage extends FormPage
             Box::make([
                 ID::make()->sortable(),
                 Text::make('Nomi', 'name')->required(),
-                Text::make('Yonalish', 'direction')->required(),
-                Text::make('Oquvchilar soni', 'schedule_image')->required(),
+                Text::make('Yo\'nalishi', 'direction')->required(),
                 Number::make('Natija foizi', 'result_percentage')->nullable(),
                 BelongsTo::make('Tarbiyachi', 'teacher', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class)->nullable(),
                 BelongsTo::make('Yordamchi Tarbiyachi', 'assistant', formatted: static fn (HomeSlider $model) => $model->name, resource: HomeSliderResource::class)->nullable(),

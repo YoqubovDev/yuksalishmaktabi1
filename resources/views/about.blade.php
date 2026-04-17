@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sevinch - 475-chi sonli bolalar bog`chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         tailwind.config = {
@@ -571,8 +572,8 @@
 
     <!-- Hero Section -->
     <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog`chasi xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Sevinch - 475-chi sonli bolalar bog`chasi innovatsiya ta'limning mukammalligiga javob beradi</p>
+        <h1 class="text-5xl font-bold">{{ __('messages.hero_welcome') }}</h1>
+        <p class="text-lg mt-4">{{ __('messages.hero_welcome_desc') }}</p>
     </section>
 
     <!-- Statistics Section -->
@@ -591,20 +592,22 @@
 {{--        </div>--}}
 {{--    </section>--}}
 <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+    @if($stat)
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
         <h2 class="text-4xl font-bold text-blue-900">{{ $stat->students_count }}+</h2>
-        <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Hodimlar</p>
+        <p class="text-gray-600">{{ __('messages.stat_staff') }}</p>
     </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
         <h2 class="text-4xl font-bold text-blue-900">{{ $stat->qualified_teachers }}+</h2>
-        <p class="text-gray-600">Malakali Hodimlar</p>
+        <p class="text-gray-600">{{ __('messages.stat_qualified') }}</p>
     </div>
 
     <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
         <h2 class="text-4xl font-bold text-blue-900">{{ $stat->graduation_rate }}</h2>
-        <p class="text-gray-600">Bitiruv Darajasi</p>
+        <p class="text-gray-600">{{ __('messages.stat_graduation') }}</p>
     </div>
+    @endif
 </section>
 
 
@@ -613,11 +616,11 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
             <span class="inline-block mb-4 bg-cyan-600/10 text-cyan-600 border border-cyan-600/20 px-3 py-1 rounded-full text-sm">
-                Yangiliklar
+                {{ __('messages.news') }}
             </span>
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">So'nggi yangiliklar</h2>
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">{{ __('messages.latest_news') }}</h2>
                 <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Bog'chamizning so'nggi yangiliklari va tadbirlari bilan tanishing
+                    {{ __('messages.news_desc') }}
                 </p>
             </div>
 
@@ -657,7 +660,7 @@
                     </div>
                 @empty
                     <div class="col-span-full text-center py-12">
-                        <p class="text-gray-500 text-lg">Hozircha yangiliklar mavjud emas</p>
+                        <p class="text-gray-500 text-lg">{{ __('messages.no_news') }}</p>
                     </div>
                 @endforelse
             </div>

@@ -777,6 +777,7 @@
                         <li><a href="<?php echo e(route('teachers')); ?>" class="<?php echo e(request()->routeIs('teachers') ? 'active-link' : ''); ?>"><?php echo e(__('messages.teachers')); ?></a></li>
                         <li><a href="<?php echo e(route('subject')); ?>" class="<?php echo e(request()->routeIs('subject') ? 'active-link' : ''); ?>"><?php echo e(__('messages.subjects')); ?></a></li>
                         <li><a href="<?php echo e(route('achievements')); ?>" class="<?php echo e(request()->routeIs('achievements') ? 'active-link' : ''); ?>"><?php echo e(__('messages.achievements')); ?></a></li>
+                        <li><a href="<?php echo e(route('news')); ?>" class="<?php echo e(request()->routeIs('news') ? 'active-link' : ''); ?>"><?php echo e(__('messages.news')); ?></a></li>
                         <li><a href="<?php echo e(route('contact')); ?>" class="<?php echo e(request()->routeIs('contact') ? 'active-link' : ''); ?>"><?php echo e(__('messages.contact')); ?></a></li>
                         
                         <li class="lang-container">

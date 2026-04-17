@@ -34,15 +34,15 @@ class AchievementFormPage extends FormPage
             Box::make([
                 ID::make(),
                 Text::make('Ism / Sarlavha', 'name')->required()
-                    ->placeholder('Masalan: Dasturlash bo‘yicha sertifikat'),
+                    ->placeholder('Masalan: Eng yaxshi rasmlar tanlovi g\'olibi'),
                 Text::make('Badge', 'badge')
-                    ->placeholder('Masalan: Oltin'),
+                    ->placeholder('Masalan: Oltin medal'),
                 Textarea::make('Tavsif', 'description')
-                    ->placeholder('Masalan: Python va algoritmlar bo‘yicha xalqaro kursni muvaffaqiyatli yakunladi.'),
+                    ->placeholder('Masalan: Tuman miqyosidagi "Mening orzuimdagi uy" rasmlar tanlovida 1-o\'rinni egalladi.'),
                 Image::make('Rasm', 'image')
                     ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),
                 Text::make('Category', 'category')
-                    ->placeholder('Masalan: IT'),
+                    ->placeholder('Masalan: Respublika miqyosida'),
             ]),
         ];
     }

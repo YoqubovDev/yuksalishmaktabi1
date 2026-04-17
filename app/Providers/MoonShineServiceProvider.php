@@ -12,7 +12,6 @@ use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use App\MoonShine\Resources\Achievement\AchievementResource;
 use App\MoonShine\Resources\Contact\ContactResource;
-use App\MoonShine\Resources\Course\CourseResource;
 use App\MoonShine\Resources\Departments\DepartmentsResource;
 use App\MoonShine\Resources\Group\GroupResource;
 use App\MoonShine\Resources\HomeSlider\HomeSliderResource;
@@ -20,11 +19,9 @@ use App\MoonShine\Resources\News\NewsResource;
 use App\MoonShine\Resources\PhotoCard\PhotoCardResource;
 use App\MoonShine\Resources\Reception\ReceptionResource;
 use App\MoonShine\Resources\Slider\SliderResource;
-use App\MoonShine\Resources\Teacher\TeacherResource;
-use App\MoonShine\Resources\Video\VideoResource;
 use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
-use App\MoonShine\Resources\ExamStats\ExamStatsResource;
+use App\MoonShine\Resources\AchievementStats\AchievementStatsResource;
 use App\MoonShine\Resources\StaffCategory\StaffCategoryResource;
 use App\MoonShine\Resources\Student\StudentResource;
 
@@ -41,7 +38,6 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserRoleResource::class,
                 AchievementResource::class,
                 ContactResource::class,
-                CourseResource::class,
                 DepartmentsResource::class,
                 GroupResource::class,
                 HomeSliderResource::class,
@@ -49,11 +45,9 @@ class MoonShineServiceProvider extends ServiceProvider
                 PhotoCardResource::class,
                 ReceptionResource::class,
                 SliderResource::class,
-                TeacherResource::class,
-                VideoResource::class,
                 AboutStaticResource::class,
                 TeacherStatsResource::class,
-                ExamStatsResource::class,
+                AchievementStatsResource::class,
                 StaffCategoryResource::class,
                 StudentResource::class,
             ])

@@ -777,6 +777,7 @@
                         <li><a href="{{route('teachers')}}" class="{{ request()->routeIs('teachers') ? 'active-link' : '' }}">{{ __('messages.teachers') }}</a></li>
                         <li><a href="{{route('subject')}}" class="{{ request()->routeIs('subject') ? 'active-link' : '' }}">{{ __('messages.subjects') }}</a></li>
                         <li><a href="{{route('achievements')}}" class="{{ request()->routeIs('achievements') ? 'active-link' : '' }}">{{ __('messages.achievements') }}</a></li>
+                        <li><a href="{{route('news')}}" class="{{ request()->routeIs('news') ? 'active-link' : '' }}">{{ __('messages.news') }}</a></li>
                         <li><a href="{{route('contact')}}" class="{{ request()->routeIs('contact') ? 'active-link' : '' }}">{{ __('messages.contact') }}</a></li>
                         
                         <li class="lang-container">

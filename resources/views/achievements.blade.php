@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sevinch - 475-chi sonli bolalar bog`chasi</title>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         tailwind.config = {
@@ -32,6 +34,7 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+        [x-cloak] { display: none !important; }
         .hero-text-shadow {
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
@@ -565,19 +568,34 @@
         }
     </style>
 </head>
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-100" x-data="{ zoomImage: false, zoomedImageSrc: '' }">
+    <!-- Image Zoom Overlay -->
+    <div x-show="zoomImage" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 scale-90"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-90"
+         class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 p-4 md:p-10"
+         @click="zoomImage = false"
+         x-cloak>
+        <button class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
+            <i class="fas fa-times text-4xl"></i>
+        </button>
+        <img :src="zoomedImageSrc" class="max-w-full max-h-full rounded-2xl shadow-2xl object-contain border-4 border-white/10">
+    </div>
     <!-- Navigation -->
     <x-header></x-header>
 
     <!-- Achievements Section Header -->
     <section id="achievements" class="py-16 bg-gradient-to-b from-blue-900 to-blue-800">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-white mb-4">Talabalar yutuqlari</h2>
-                <div class="w-24 h-1 bg-yellow-400 mx-auto mb-6"></div>
-                <p class="text-blue-100 max-w-2xl mx-auto">Iqtidorli talabalarimizning yuksak natijalari va a'lo
-                    yutuqlarini e'tirof etamiz</p>
-            </div>
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-black text-white mb-4 uppercase tracking-widest">{{ __('messages.achievements_title_main') }}</h2>
+            <div class="w-40 h-1.5 bg-yellow-400 mx-auto mb-8 rounded-full"></div>
+            <p class="text-blue-100 max-w-2xl mx-auto text-xl font-light">
+                {{ __('messages.achievements_page_desc') }}
+            </p>
         </div>
     </section>
 
@@ -586,16 +604,17 @@
         <div class="container mx-auto px-4">
             @if($achievements->isEmpty())
             <div class="text-center py-12">
-                <p class="text-gray-600 text-xl">Hozircha yutuqlar qo'shilmagan</p>
+                <p class="text-gray-600 text-xl">{{ __('messages.no_achievements') }}</p>
             </div>
             @else
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($achievements as $achievement)
                 <div
                     class="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
-                    <div class="h-48 w-full">
+                    <div class="h-56 w-full relative group overflow-hidden cursor-zoom-in" 
+                         @click="zoomedImageSrc = '{{ asset('storage/' . $achievement->image) }}'; zoomImage = true">
                         @if($achievement->image)
-                        <img src="{{ asset('storage/' . $achievement->image) }}" class="w-full h-full object-cover"
+                        <img src="{{ asset('storage/' . $achievement->image) }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                             alt="{{ $achievement->name }}">
                         @else
                         <div
@@ -603,6 +622,9 @@
                             <i class="fas fa-trophy text-white text-6xl"></i>
                         </div>
                         @endif
+                        <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-4xl drop-shadow-lg"></i>
+                        </div>
                     </div>
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-4">
@@ -646,27 +668,36 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
 
 
-            <div class="text-center">
-                <div class="text-5xl font-bold text-blue-600 mb-2 counter" data-target="{{ $stats->cefr }}">0</div>
-                <div class="text-gray-600 font-medium">CEFR sertifikatlari</div>
+            <div class="text-center group p-8 rounded-3xl hover:bg-white hover:shadow-2xl transition-all duration-500">
+                <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                    <i class="fas fa-medal text-3xl"></i>
+                </div>
+                <div class="text-5xl font-black text-blue-900 mb-2 counter" data-target="{{ $stats->olympiad_winners }}">0</div>
+                <div class="text-gray-500 font-bold uppercase tracking-tighter text-xs">{{ __('messages.olympiad_winners') }}</div>
             </div>
 
-
-            <div class="text-center">
-                <div class="text-5xl font-bold text-blue-600 mb-2 counter" data-target="{{ $stats->universitet }}">0</div>
-                <div class="text-gray-600 font-medium">Universitetlarga qabul %</div>
+            <div class="text-center group p-8 rounded-3xl hover:bg-white hover:shadow-2xl transition-all duration-500">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                    <i class="fas fa-graduation-cap text-3xl"></i>
+                </div>
+                <div class="text-5xl font-black text-blue-900 mb-2 counter" data-target="{{ $stats->maktab_tayyorlov }}">0</div>
+                <div class="text-gray-500 font-bold uppercase tracking-tighter text-xs">{{ __('messages.school_prep') }}</div>
             </div>
 
-
-            <div class="text-center">
-                <div class="text-5xl font-bold text-blue-600 mb-2 counter" data-target="{{ $stats->ielts }}">0</div>
-                <div class="text-gray-600 font-medium">IELTS yuqori balllar</div>
+            <div class="text-center group p-8 rounded-3xl hover:bg-white hover:shadow-2xl transition-all duration-500">
+                <div class="w-20 h-20 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                    <i class="fas fa-star text-3xl"></i>
+                </div>
+                <div class="text-5xl font-black text-blue-900 mb-2 counter" data-target="{{ $stats->iqtidorli_bolalar }}">0</div>
+                <div class="text-gray-500 font-bold uppercase tracking-tighter text-xs">{{ __('messages.talented_children') }}</div>
             </div>
 
-
-            <div class="text-center">
-                <div class="text-5xl font-bold text-blue-600 mb-2 counter" data-target="{{ $stats->sat }}">0</div>
-                <div class="text-gray-600 font-medium">SAT yuqori balllar</div>
+            <div class="text-center group p-8 rounded-3xl hover:bg-white hover:shadow-2xl transition-all duration-500">
+                <div class="w-20 h-20 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner group-hover:scale-110 transition-transform">
+                    <i class="fas fa-trophy text-3xl"></i>
+                </div>
+                <div class="text-5xl font-black text-blue-900 mb-2 counter" data-target="{{ $stats->jami_yutuqlar }}">0</div>
+                <div class="text-gray-500 font-bold uppercase tracking-tighter text-xs">{{ __('messages.total_awards') }}</div>
             </div>
 
 

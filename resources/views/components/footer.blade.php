@@ -1,3 +1,6 @@
+@php
+    $contact = \App\Models\Contact::first();
+@endphp
 <footer id="contact" class="bg-gradient-to-b from-turin-dark to-gray-900 text-white py-12">
     <!-- Top Footer Section -->
     <div class="container mx-auto px-6 mb-8">
@@ -10,8 +13,8 @@
                     </div>
                 </div>
                 <div>
-                    <div class="text-2xl font-serif font-bold text-white">Sevinch - 475</div>
-                    <div class="text-[11px] tracking-wider text-gray-400">Bog`cha - Parkent tuman</div>
+                    <div class="text-2xl font-serif font-bold text-white">{{ $contact->name ?? 'Sevinch - 475' }}</div>
+                    <div class="text-[11px] tracking-wider text-gray-400">Bog'cha - Toshkent shahri, Chilonzor tumani</div>
                 </div>
             </div>
 
@@ -21,7 +24,7 @@
                     <i class="fa-solid fa-phone text-unipix-light mr-3 text-sm"></i>
                     <div>
                         <div class="text-gray-500 text-[9px] uppercase font-bold tracking-tighter">Telefon</div>
-                        <a href="tel:+998910040785" class="text-white text-xs font-bold hover:text-unipix-light transition-colors">(+998) 91-004-07-85</a>
+                        <a href="tel:+998{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '991234567') }}" class="text-white text-xs font-bold hover:text-unipix-light transition-colors">+998 {{ $contact->phone ?? '99 123 45 67' }}</a>
                     </div>
                 </div>
 
@@ -29,7 +32,7 @@
                     <i class="fa-solid fa-envelope text-unipix-light mr-3 text-sm"></i>
                     <div>
                         <div class="text-gray-500 text-[9px] uppercase font-bold tracking-tighter">Email</div>
-                        <a href="mailto:info@turinal.uz" class="text-white text-xs font-bold hover:text-unipix-light transition-colors">info@turinal.uz</a>
+                        <a href="mailto:{{ $contact->email ?? 'sevinch475@mail.uz' }}" class="text-white text-xs font-bold hover:text-unipix-light transition-colors">{{ $contact->email ?? 'sevinch475@mail.uz' }}</a>
                     </div>
                 </div>
             </div>
@@ -45,20 +48,24 @@
                 Bog`cha haqida
             </h3>
             <p class="text-gray-400 leading-relaxed text-sm">
-                Jizzax Sevinch - 475-chi sonli bolalar bog`chasi nufuzli ta'lim muassasasi bo'lib, zamonaviy va innovatsion yondashuvlarga asoslangan.
+                Sevinch - 475-chi sonli bolalar bog`chasi Toshkent shahri, Chilonzor tumanida joylashgan nufuzli ta'lim muassasasi bo'lib, zamonaviy va innovatsion yondashuvlarga asoslangan.
             </p>
-            <div class="flex space-x-3 pt-2">
-                <a href="#" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-unipix-light transition-all border border-white/10 hover:border-unipix-light">
-                    <i class="fa-brands fa-facebook-f text-sm"></i>
+            <div class="flex space-x-3 pt-4">
+                @if($contact && $contact->telegram)
+                <a href="{{ str_starts_with($contact->telegram, 'http') ? $contact->telegram : 'https://t.me/' . str_replace('@', '', $contact->telegram) }}" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-500 transition-all border border-white/10 shadow-lg group">
+                    <i class="fa-brands fa-telegram text-white group-hover:scale-110 transition-transform"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-unipix-light transition-all border border-white/10 hover:border-unipix-light">
-                    <i class="fa-brands fa-instagram text-sm"></i>
+                @endif
+                @if($contact && $contact->instagram)
+                <a href="{{ str_starts_with($contact->instagram, 'http') ? $contact->instagram : 'https://instagram.com/' . $contact->instagram }}" target="_blank" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-pink-600 transition-all border border-white/10 shadow-lg group">
+                    <i class="fa-brands fa-instagram text-white group-hover:scale-110 transition-transform"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-unipix-light transition-all border border-white/10 hover:border-unipix-light">
-                    <i class="fa-brands fa-telegram text-sm"></i>
+                @endif
+                <a href="#" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-red-600 transition-all border border-white/10 shadow-lg group">
+                    <i class="fa-brands fa-youtube text-white group-hover:scale-110 transition-transform"></i>
                 </a>
-                <a href="#" class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-unipix-light transition-all border border-white/10 hover:border-unipix-light">
-                    <i class="fa-brands fa-youtube text-sm"></i>
+                <a href="#" class="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center hover:bg-blue-700 transition-all border border-white/10 shadow-lg group">
+                    <i class="fa-brands fa-facebook-f text-white group-hover:scale-110 transition-transform"></i>
                 </a>
             </div>
         </div>
@@ -98,7 +105,7 @@
                     </div>
                 </div>
 
-                <a href="tel:+998910040785" class="inline-flex items-center justify-center w-full bg-unipix-light text-white py-3 rounded-lg font-bold text-sm hover:bg-unipix-blue transition-all shadow-lg hover:shadow-unipix-light/20">
+                <a href="tel:+998{{ preg_replace('/[^0-9]/', '', $contact->phone ?? '991234567') }}" class="inline-flex items-center justify-center w-full bg-unipix-light text-white py-3 rounded-lg font-bold text-sm hover:bg-unipix-blue transition-all shadow-lg hover:shadow-unipix-light/20">
                     <i class="fa-solid fa-paper-plane mr-2"></i> Bog‘lanish
                 </a>
             </div>
@@ -108,7 +115,7 @@
     <!-- Bottom Footer -->
     <div class="container mx-auto mt-8 pt-6 border-t border-white/5 px-6">
         <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-            <p>© 2025 Sevinch - 475-chi sonli bolalar bog`chasi.</p>
+            <p>© {{ date('Y') }} {{ $contact->name ?? 'Sevinch - 475-chi sonli bolalar bog`chasi' }}.</p>
             <div class="flex space-x-4 mt-4 md:mt-0">
                 <a href="#" class="hover:text-white">Maxfiylik</a>
                 <a href="#" class="hover:text-white">Shartlar</a>

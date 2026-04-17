@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sevinch - 475-chi sonli bolalar bog`chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -574,29 +576,6 @@
 }">
     <!-- Navigation -->
     <x-header></x-header>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'unipix-blue': '#161179',
-                        'unipix-light': '#2a2a9e',
-                        'unipix-dark': '#0c0950',
-                        'turin-green': '#16A34A',
-                        'turin-dark': '#003366',
-                    },
-                    fontFamily: {
-                        'serif': ['Playfair Display', 'serif'],
-                        'sans': ['Poppins', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        'elegant': '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-                    }
-                }
-            }
-        }
-    </script>
-
     <!-- Teachers Hero Section -->
     <section class="py-16 bg-gradient-to-br from-unipix-dark via-blue-900 to-unipix-blue relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
@@ -626,11 +605,18 @@
                         
                         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16 group-hover:bg-blue-100 transition-colors duration-500"></div>
                         
-                        <div class="w-48 h-48 mx-auto mb-8 relative">
+                        <div class="w-48 h-48 mx-auto mb-8 relative group/img-container">
                             <div class="absolute inset-0 bg-blue-600 rounded-full scale-110 opacity-0 group-hover:opacity-20 transition-all duration-500 blur-md"></div>
                             <img src="{{ asset('storage/' . $teacher->image) }}"
                                  class="w-full h-full object-cover rounded-full border-8 border-white shadow-2xl relative z-10 transition-transform duration-500 group-hover:scale-105"
                                  alt="{{ $teacher->name }}">
+                            <!-- Image Zoom Overlay -->
+                            <div class="absolute inset-0 z-20 flex items-center justify-center opacity-0 group-hover/img-container:opacity-100 transition-all duration-300">
+                                <div @click.stop="zoomedImageSrc = '{{ asset('storage/' . $teacher->image) }}'; zoomImage = true" 
+                                     class="p-4 bg-white/90 text-blue-900 rounded-full shadow-2xl hover:scale-110 transition-transform cursor-zoom-in">
+                                    <i class="fas fa-search-plus text-2xl"></i>
+                                </div>
+                            </div>
                         </div>
                         
                         <h4 class="text-3xl font-bold text-blue-900 mb-3 group-hover:text-unipix-light transition-colors">{{ $teacher->name }}</h4>
@@ -641,9 +627,10 @@
                         <p class="text-gray-500 text-base line-clamp-2 leading-relaxed mb-8 px-4">{{ $teacher->bio }}</p>
                         
                         <div class="pt-6 border-t border-gray-100 flex justify-center items-center">
-                            <span class="text-blue-600 font-black text-sm uppercase tracking-widest flex items-center group-hover:translate-x-2 transition-transform duration-300">
-                                Batafsil <i class="fas fa-chevron-right ml-3 text-xs bg-blue-600 text-white p-1.5 rounded-full shadow-md"></i>
-                            </span>
+                            <div class="inline-flex items-center px-8 py-3 bg-blue-50 text-blue-700 rounded-full text-sm font-black uppercase tracking-widest group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-lg">
+                                {{ __('messages.more_details') }} 
+                                <i class="fas fa-arrow-right ml-3 text-xs transition-transform duration-300 group-hover:translate-x-2"></i>
+                            </div>
                         </div>
                     </div>
                 @endforeach
@@ -701,7 +688,7 @@
                                 <button @click="showGroup = !showGroup" 
                                         class="flex items-center justify-center w-full px-8 py-4 bg-yellow-400 text-blue-900 rounded-2xl font-black uppercase tracking-widest shadow-xl hover:bg-yellow-500 hover:-translate-y-1 transition-all duration-300">
                                     <i class="fas fa-users mr-3 text-xl"></i>
-                                    <span x-text="showGroup ? 'Ma\'lumotga qaytish' : 'Guruhimni ko\'rish'"></span>
+                                    <span x-text="showGroup ? '{{ __('messages.back_to_info') }}' : '{{ __('messages.see_group') }}'"></span>
                                 </button>
                             </template>
                         </div>
@@ -709,18 +696,59 @@
                         <!-- Right side: Content -->
                         <div class="md:w-2/3 p-10 md:p-14 overflow-hidden">
                             <!-- Teacher Bio View -->
-                            <div x-show="!showGroup" x-transition:enter="transition opacity duration-300" class="h-full flex flex-col justify-center">
-                                <div class="flex items-center mb-6">
-                                    <div class="w-12 h-1 bg-blue-600 rounded-full mr-4"></div>
-                                    <h4 class="text-xl font-bold text-blue-900 uppercase tracking-widest italic">Biografiya</h4>
-                                </div>
-                                <p class="text-gray-600 text-xl leading-relaxed italic font-serif" x-text="selectedTeacher?.bio"></p>
-                                <div class="mt-12 flex flex-wrap gap-4">
-                                    <div class="flex items-center bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100 shadow-sm text-gray-500 font-bold text-sm">
-                                        <i class="fas fa-graduation-cap mr-3 text-blue-600 text-lg"></i> Oliy ma'lumotli
+                            <div x-show="!showGroup" x-transition:enter="transition opacity duration-300" class="h-full flex flex-col">
+                                <div class="mb-10">
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-12 h-1.5 bg-yellow-400 rounded-full mr-4"></div>
+                                        <h4 class="text-2xl font-black text-blue-900 uppercase tracking-widest">{{ __('messages.contact_info') }}</h4>
                                     </div>
-                                    <div class="flex items-center bg-gray-50 px-6 py-3 rounded-2xl border border-gray-100 shadow-sm text-gray-500 font-bold text-sm">
-                                        <i class="fas fa-award mr-3 text-yellow-500 text-lg"></i> Toifali mutaxassis
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                                        <div class="bg-blue-50/50 p-6 rounded-3xl border border-blue-100 flex items-center group hover:bg-white hover:shadow-xl transition-all duration-300">
+                                            <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-blue-600 shadow-sm mr-4 group-hover:scale-110 transition-transform">
+                                                <i class="fas fa-briefcase"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-[10px] font-black uppercase text-blue-400 tracking-widest">{{ __('messages.experience') }}</p>
+                                                <p class="text-lg font-bold text-blue-900" x-text="selectedTeacher?.experience || '{{ __('messages.years_experience') }}'"></p>
+                                            </div>
+                                        </div>
+                                        <div class="bg-yellow-50/50 p-6 rounded-3xl border border-yellow-100 flex items-center group hover:bg-white hover:shadow-xl transition-all duration-300">
+                                            <div class="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-yellow-600 shadow-sm mr-4 group-hover:scale-110 transition-transform">
+                                                <i class="fas fa-language"></i>
+                                            </div>
+                                            <div>
+                                                <p class="text-[10px] font-black uppercase text-yellow-600 tracking-widest">{{ __('messages.languages') }}</p>
+                                                <p class="text-lg font-bold text-blue-900" x-text="selectedTeacher?.languages || 'O\'zbek, Rus'"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-12 h-1.5 bg-blue-600 rounded-full mr-4"></div>
+                                        <h4 class="text-2xl font-black text-blue-900 uppercase tracking-widest">{{ __('messages.biography') }}</h4>
+                                    </div>
+                                    <div class="relative">
+                                        <i class="fas fa-quote-left absolute -top-4 -left-4 text-4xl text-blue-100 -z-10"></i>
+                                        <p class="text-gray-600 text-xl leading-relaxed italic font-serif relative z-10" x-text="selectedTeacher?.bio"></p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-8 border-t border-gray-100">
+                                    <div class="flex flex-wrap gap-4">
+                                        <div class="flex items-center bg-white px-6 py-3 rounded-2xl border border-gray-100 shadow-sm text-gray-700 font-bold text-sm">
+                                            <i class="fas fa-graduation-cap mr-3 text-blue-600 text-lg"></i> <span x-text="selectedTeacher?.education || 'Oliy ma\'lumotli'"></span>
+                                        </div>
+                                        <div class="flex items-center bg-white px-6 py-3 rounded-2xl border border-gray-100 shadow-sm text-gray-700 font-bold text-sm">
+                                            <i class="fas fa-award mr-3 text-yellow-500 text-lg"></i> <span x-text="selectedTeacher?.award || 'Toifali mutaxassis'"></span>
+                                        </div>
+                                        <template x-if="selectedTeacher?.phone">
+                                            <a :href="'tel:' + selectedTeacher.phone" class="flex items-center bg-blue-600 text-white px-6 py-3 rounded-2xl shadow-lg shadow-blue-200 hover:-translate-y-1 transition-all duration-300 font-bold text-sm">
+                                                <i class="fas fa-phone-alt mr-3"></i> {{ __('messages.connect') }}
+                                            </a>
+                                        </template>
+                                    </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -743,8 +771,8 @@
                                                      class="w-full h-full object-cover">
                                             </div>
                                             <div>
-                                                <p class="text-[10px] font-black uppercase text-blue-400 tracking-widest mb-1">Yordamchi tarbiyachi</p>
-                                                <p class="text-xl font-bold text-blue-900" x-text="selectedTeacher.teacher_of_groups[0].assistant?.name || 'Mavjud emas'"></p>
+                                                <p class="text-[10px] font-black uppercase text-blue-400 tracking-widest mb-1">{{ __('messages.assistant_teacher') }}</p>
+                                                <p class="text-xl font-bold text-blue-900" x-text="selectedTeacher.teacher_of_groups[0].assistant?.name || '{{ __('messages.not_available') }}'"></p>
                                             </div>
                                         </div>
 
@@ -752,7 +780,7 @@
                                         <div>
                                             <h5 class="text-sm font-black text-gray-400 uppercase tracking-widest mb-6 flex items-center">
                                                 <span class="w-8 h-[2px] bg-gray-200 mr-3"></span>
-                                                Tarbiyalanuvchilar (Bolalar)
+                                                {{ __('messages.children') }}
                                             </h5>
                                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 max-h-[300px] overflow-y-auto pr-4 custom-scrollbar">
                                                 <template x-for="student in selectedTeacher.teacher_of_groups[0].students" :key="student.id">
@@ -814,7 +842,7 @@
                     <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner">
                         <i class="fas fa-chalkboard-teacher text-3xl"></i>
                     </div>
-                    <div class="text-5xl font-black text-blue-900 mb-2">{{ $stats->kutator }}+</div>
+                    <div class="text-5xl font-black text-blue-900 mb-2">{{ $stats->kurator }}+</div>
                     <div class="text-gray-400 font-black uppercase tracking-widest text-[10px]">{{ __('messages.curator_teacher') }}</div>
                 </div>
                 <div class="bg-white p-10 rounded-3xl shadow-xl hover:shadow-2xl transition-all border border-gray-100 text-center">

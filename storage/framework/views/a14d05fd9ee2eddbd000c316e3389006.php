@@ -684,8 +684,6 @@
 <?php unset($__componentOriginalfd1f218809a441e923395fcbf03e4272); ?>
 <?php endif; ?>
 
-
-
   <!-- Hero Slider Section -->
   <section class="main-slider">
     <div class="main-slides">
@@ -753,10 +751,27 @@
     </button>
   </section>
 
+  <!-- Statistics Section -->
+  <?php if($stat): ?>
+  <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
+          <h2 class="text-4xl font-bold text-blue-900"><?php echo e($stat->students_count); ?>+</h2>
+          <p class="text-gray-600"><?php echo e(__('messages.stat_staff')); ?></p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
+          <h2 class="text-4xl font-bold text-blue-900"><?php echo e($stat->qualified_teachers); ?>+</h2>
+          <p class="text-gray-600"><?php echo e(__('messages.stat_qualified')); ?></p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
+          <h2 class="text-4xl font-bold text-blue-900"><?php echo e($stat->graduation_rate); ?></h2>
+          <p class="text-gray-600"><?php echo e(__('messages.stat_graduation')); ?></p>
+      </div>
+  </section>
+  <?php endif; ?>
 
   <section class="py-20 bg-gray-50" x-data="{ showModal: false, imageUrl: '' }">
       <div class="container mx-auto px-4">
-          <h3 class="text-4xl font-extrabold text-blue-900 mb-12 text-center">Qabul Rasmlari</h3>
+          <h3 class="text-4xl font-extrabold text-blue-900 mb-12 text-center"><?php echo e(__('messages.reception_photos')); ?></h3>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
               <?php $__currentLoopData = $qabulrasmis; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $rasm): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
@@ -790,22 +805,25 @@
       <div class="bg-white rounded-lg shadow-lg p-8">
         <h2 class="text-4xl font-bold text-unipix-blue text-center mb-8"><?php echo e(__('messages.about_us')); ?></h2>
         <p class="text-gray-600 text-lg mb-6">
-            Sevinch - 475-chi sonli bolalar bog`chasi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat talabalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
+            <?php echo e(__('messages.about_desc')); ?>
+
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.advantages')); ?></h3>
         <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
-          <li><strong>Professional tarbiyachilar:</strong>Bog'chamiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
-          <li><strong>Innovatsion metodologiyalar:</strong> O'qitish zamonaviy texnologiyalar va interfaol ta'lim usullaridan foydalangan holda amalga oshiriladi.</li>
-          <li><strong>Amaliy o'quv jarayoni:</strong> Haqiqiy loyihalar va amaliy mashg'ulotlar orqali nazariy bilimlarni mustahkamlash imkoniyati.</li>
-          <li><strong>Global yondashuv:</strong> Talabalarga xalqaro standartlarga javob beradigan bilim va ko'nikmalar beriladi.</li>
+          <li><strong><?php echo e(__('messages.adv_prof_title')); ?></strong> <?php echo e(__('messages.adv_prof_desc')); ?></li>
+          <li><strong><?php echo e(__('messages.adv_innov_title')); ?></strong> <?php echo e(__('messages.adv_innov_desc')); ?></li>
+          <li><strong><?php echo e(__('messages.adv_healthy_title')); ?></strong> <?php echo e(__('messages.adv_healthy_desc')); ?></li>
+          <li><strong><?php echo e(__('messages.adv_safe_title')); ?></strong> <?php echo e(__('messages.adv_safe_desc')); ?></li>
         </ul>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.history')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
-            2023 yilda tashkil etilgan Jizzax shahridagi Sevinch - 475-chi sonli bolalar bog`chasi O'zbekiston yoshlariga sifatli ta'lim-tarbiya berish maqsadida tashkil etilgan. 475 nafar o'quvchiga mo'ljallangan  boqcha milliy ta'lim standartlariga asoslangan zamonaviy tarbiya muhitini taklif etadi. U bolalarni fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha qat'iy dasturlar orqali tayyorlaydi. Qabul ingliz tilidagi rasmiy intervyu bilan bir qatorda matematika, fizika va ingliz tilidagi test natijalariga asoslanadi. Sevinch - 475-chi sonli bolalar bog`chasi o'quvchilarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi martabalariga erishishda g'urur bilan qo'llab-quvvatlaydi.
+            <?php echo e(__('messages.history_desc')); ?>
+
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4"><?php echo e(__('messages.mission')); ?></h3>
         <p class="text-gray-600 text-lg mb-6">
-            Bizning vazifamiz talabalarga akademik salohiyati va shaxsiy o'sishini ta'minlaydigan yuqori sifatli ta'lim berishdir. Biz talabalar fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha chuqur bilim olishlari mumkin bo'lgan dinamik o'quv muhitini ta'minlashga intilamiz. Tajribali fakulteti orqali, zamonaviy inshootlari, va mukammallikni uchun majburiyat, biz universitet uchun emas, balki faqat bizning talabalarga tayyorlash, lekin ularning kelajakda martaba muvaffaqiyat va jamiyat uchun mazmunli hissasi uchun.
+            <?php echo e(__('messages.mission_desc')); ?>
+
         </p>
       </div>
     </div>
@@ -971,7 +989,7 @@
                    x-transition:enter="ease-out duration-300" 
                    x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
                    x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
-                   class="inline-block align-middle bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-4xl w-full">
+                   class="inline-block align-bottom bg-white rounded-3xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:max-w-4xl w-full">
                   
                   <div class="bg-blue-900 px-6 py-4 flex justify-between items-center text-white">
                       <div>
@@ -994,9 +1012,6 @@
                                   <p class="text-xs font-semibold text-blue-900 truncate" x-text="student.name"></p>
                               </div>
                           </template>
-                      </div>
-                      <div x-show="selectedGroup.students.length === 0" class="text-center py-10 text-gray-400">
-                          Bolalar malumoti kiritilmagan
                       </div>
                   </div>
 
@@ -1088,42 +1103,74 @@
       });
   </script>
 
+  <!-- Latest News Section -->
+  <section id="news" class="py-20">
+      <div class="container mx-auto px-4">
+          <div class="text-center mb-16">
+          <span class="inline-block mb-4 bg-cyan-600/10 text-cyan-600 border border-cyan-600/20 px-3 py-1 rounded-full text-sm">
+              <?php echo e(__('messages.news')); ?>
 
-  <!-- JS for Auto Sliding -->
-  <script>
-      const slider = document.getElementById("team-slider");
-      const prevBtn = document.getElementById("team-prev");
-      const nextBtn = document.getElementById("team-next");
-      let scrollAmount = 0;
-      const scrollStep = 300;
+          </span>
+              <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4"><?php echo e(__('messages.latest_news')); ?></h2>
+              <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                  <?php echo e(__('messages.news_desc')); ?>
 
-      function scrollNext() {
-          if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
-              scrollAmount = 0;
-          } else {
-              scrollAmount += scrollStep;
-          }
-          slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
-      }
+              </p>
+          </div>
 
-      function scrollPrev() {
-          scrollAmount -= scrollStep;
-          if (scrollAmount < 0) {
-              scrollAmount = slider.scrollWidth - slider.clientWidth;
-          }
-          slider.scrollTo({ left: scrollAmount, behavior: "smooth" });
-      }
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <?php $__empty_1 = true; $__currentLoopData = $news; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                  <!-- News Card -->
+                  <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover-lift overflow-hidden">
+                      <div class="aspect-video overflow-hidden">
+                          <?php if($item->image): ?>
+                              <img
+                                  src="<?php echo e(asset('storage/' . $item->image)); ?>"
+                                  alt="<?php echo e($item->title); ?>"
+                                  class="w-full h-full object-cover hover-scale transition-transform duration-300"
+                              />
+                          <?php else: ?>
+                              <img
+                                  src="/placeholder-news.jpg"
+                                  alt="Default image"
+                                  class="w-full h-full object-cover hover-scale transition-transform duration-300"
+                              />
+                          <?php endif; ?>
+                      </div>
+                      <div class="p-6">
+                          <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
+                              <i class="fas fa-calendar-alt text-cyan-600"></i>
+                              <?php echo e($item->published_at ? $item->published_at->format('d.m.Y') : ''); ?>
 
-      nextBtn.addEventListener("click", scrollNext);
-      prevBtn.addEventListener("click", scrollPrev);
+                          </div>
+                          <h3 class="text-lg font-semibold hover:text-cyan-600 transition-colors mb-2">
+                              <?php echo e($item->title); ?>
 
-      setInterval(scrollNext, 4000); // har 4 sekundda avtomatik suriladi
-  </script>
+                          </h3>
+                          <p class="text-gray-600 mb-4 line-clamp-2">
+                              <?php echo e($item->excerpt ?? Str::limit($item->content, 100)); ?>
 
+                          </p>
+                          <a href="<?php echo e(route('news')); ?>" class="text-cyan-600 hover:text-cyan-700 transition-colors flex items-center">
+                              <?php echo e(__('messages.more_details')); ?>
+
+                              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                              </svg>
+                          </a>
+                      </div>
+                  </div>
+              <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                  <div class="col-span-full text-center py-12">
+                      <p class="text-gray-500 text-lg"><?php echo e(__('messages.no_news')); ?></p>
+                  </div>
+              <?php endif; ?>
+          </div>
+      </div>
+  </section>
 
   <!-- Footer -->
-  <!-- Footer with improved design -->
-      <?php if (isset($component)) { $__componentOriginal8a8716efb3c62a45938aca52e78e0322 = $component; } ?>
+  <?php if (isset($component)) { $__componentOriginal8a8716efb3c62a45938aca52e78e0322 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal8a8716efb3c62a45938aca52e78e0322 = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.footer','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
 <?php $component->withName('footer'); ?>
@@ -1142,7 +1189,6 @@
 <?php $component = $__componentOriginal8a8716efb3c62a45938aca52e78e0322; ?>
 <?php unset($__componentOriginal8a8716efb3c62a45938aca52e78e0322); ?>
 <?php endif; ?>
-
 
   <!-- JavaScript for Sliders -->
   <script>
@@ -1185,30 +1231,6 @@
       currentMainSlide = (currentMainSlide + 1) % mainSlideCount;
       updateMainSlider();
     }, 5000);
-
-    // Team Slider
-    const teamSlides = document.querySelector('.slides2');
-    const teamPrev = document.getElementById('team-prev');
-    const teamNext = document.getElementById('team-next');
-    const teamSlideWidth = 264; // Width of each team member card (240px + 24px gap)
-    const teamVisibleSlides = 3; // Number of visible slides
-    let currentTeamSlide = 0;
-    const totalTeamSlides = document.querySelectorAll('.slides2 > div').length;
-
-    teamNext.addEventListener('click', () => {
-      if (currentTeamSlide < totalTeamSlides - teamVisibleSlides) {
-        currentTeamSlide++;
-        teamSlides.style.transform = `translateX(-${currentTeamSlide * teamSlideWidth}px)`;
-      }
-    });
-
-    teamPrev.addEventListener('click', () => {
-      if (currentTeamSlide > 0) {
-        currentTeamSlide--;
-        teamSlides.style.transform = `translateX(-${currentTeamSlide * teamSlideWidth}px)`;
-      }
-    });
   </script>
 </body>
-</html>
-<?php /**PATH /home/shehroz/Projects/example-app/resources/views/home.blade.php ENDPATH**/ ?>
+</html><?php /**PATH /home/shehroz/Projects/example-app/resources/views/home.blade.php ENDPATH**/ ?>

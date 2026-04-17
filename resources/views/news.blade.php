@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sevinch - 475-chi sonli bolalar bog`chasi</title>
+    <title>{{ __('messages.news') }} - Sevinch - 475-chi sonli bolalar bog`chasi</title>
+    
+    <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -28,750 +29,199 @@
             }
         }
     </script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        .hero-text-shadow {
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .gradient-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(22,17,121,0.7) 100%);
-        }
-        .btn-glow:hover {
-            box-shadow: 0 0 15px rgba(22, 17, 121, 0.6);
-        }
-        .nav-indicator::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 3px;
-            background-color: #161179;
-            transition: width 0.3s ease;
-        }
-        .nav-indicator:hover::after {
-            width: 70%;
-        }
-        .active-nav::after {
-            width: 70%;
-        }
-
-        /* Team slider styles */
-        .slides2 {
-            display: flex;
-            gap: 24px;
-            width: max-content;
-        }
-        .slider2 {
-            overflow: hidden;
-        }
-        .slider2 .slides2 > div {
-            flex-shrink: 0;
-            min-width: auto;
-            max-width: 240px;
-        }
-
-        /* Main Slider */
-        .main-slider {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
-        .main-slides {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.5s ease-in-out;
-        }
-        .main-slide {
-            flex: 0 0 100%;
-            position: relative;
-        }
-
-        .footer {
-            background: linear-gradient(to bottom, #003366, #001830);
-            color: white;
-            position: relative;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(to right, #161179, #16A34A);
-        }
-
-        .footer-top {
-            padding: 5rem 0 3rem;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-logo-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .footer-heading {
-            position: relative;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-        }
-
-        .footer-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-
-        .footer-nav-item {
-            display: flex;
-            align-items: center;
-            transition: transform 0.3s ease;
-        }
-
-        .footer-nav-item:hover {
-            transform: translateX(5px);
-        }
-
-        .footer-nav-item i {
-            color: var(--accent-color);
-            font-size: 12px;
-            margin-right: 8px;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding: 2rem 0;
-        }
-    </style>
-    <style>
-        .stat-box {
-            transition: transform 0.3s ease-in-out;
-        }
-        .stat-box:hover {
-            transform: scale(1.05);
-        }
-
-        /* Team Slider Styles */
-        .slider-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        .slider-images {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 2rem;
-        }
-
-        .slider-img {
-            position: relative;
-            height: 450px;
-            width: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: all 0.5s ease;
-            opacity: 0.6;
-            transform: scale(0.9);
-        }
-
-        .slider-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slider-img h1 {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            opacity: 0;
-            transition: all 0.5s ease;
-            z-index: 1;
-        }
-
-        .slider-img .details {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-
-        .slider-img.active {
-            opacity: 1;
-            transform: scale(1);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .slider-img.active h1 {
-            opacity: 1;
-        }
-
-        .slider-img:hover .details {
-            opacity: 1;
-        }
-
-        .slider-controls {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .slider-controls button {
-            background: transparent;
-            border: 2px solid white;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .slider-controls button:hover {
-            background: white;
-            color: black;
-        }
-
-        .slider-dots {
-            display: flex;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: white;
-            transform: scale(1.3);
-        }
-
-        .spoon-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .favorite-spoon {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 6px 12px;
-            border-radius: 20px;
-            margin-top: 8px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-        }
-
-        .spoon-collection {
-            position: absolute;
-            bottom: 80px;
-            left: 0;
-            right: 0;
-            text-align: center;
-        }
-
-        .spoon-collection img {
-            display: inline-block;
-            height: 40px;
-            margin: 0 5px;
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
-            transition: all 0.3s ease;
-        }
-
-        .spoon-collection img:hover {
-            transform: rotate(30deg) scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            .slider-img {
-                height: 350px;
-                width: 250px;
-            }
-        }
-    </style>
-    <style>
-        :root {
-            --primary-color: #0a4480;
-            --secondary-color: #1a6cb4;
-            --text-color: #333;
-            --light-bg: #f5f7fa;
-            --white: #ffffff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: var(--white);
-            padding: 1rem 0;
-            box-shadow: var(--shadow);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo img {
-            height: 60px;
-        }
-
-        .logo-text {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #b8d8ff;
-        }
-
-        .lang-switcher {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .lang-switcher a {
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-
-        .gallery-section {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary-color);
-            font-size: 2rem;
-            position: relative;
-        }
-
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--secondary-color);
-        }
-
-        .main-slider {
-            margin-bottom: 1.5rem;
-            box-shadow: var(--shadow);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .main-slider .slide {
-            position: relative;
-            height: 500px;
-        }
-
-        .main-slider img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .slide-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-            color: white;
-            padding: 1.5rem;
-        }
-
-        .slide-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .nav-slider .slide {
-            height: 100px;
-            margin: 0 10px;
-            cursor: pointer;
-            border-radius: 4px;
-            overflow: hidden;
-            opacity: 0.6;
-            transition: all 0.3s ease;
-        }
-
-        .nav-slider .slide:hover,
-        .nav-slider .slick-current .slide {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .nav-slider img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-categories {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .category-btn {
-            background-color: var(--white);
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background-color: var(--primary-color);
-            color: var(--white);
-        }
-
-        .slick-prev, .slick-next {
-            z-index: 1;
-            width: 40px;
-            height: 40px;
-        }
-
-        .slick-prev {
-            left: 15px;
-        }
-
-        .slick-next {
-            right: 15px;
-        }
-
-        .slick-prev:before, .slick-next:before {
-            font-size: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .main-slider .slide {
-                height: 350px;
-            }
-
-            .nav-slider .slide {
-                height: 70px;
-            }
-
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-            }
-        }
+        body { font-family: 'Poppins', sans-serif; }
+        [x-cloak] { display: none !important; }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .hover-scale { transition: transform 0.5s ease; }
+        .hover-lift:hover .hover-scale { transform: scale(1.05); }
     </style>
 </head>
-<body class="font-sans bg-gray-100">
-    <!-- Navigation -->
+<body class="bg-gray-50 flex flex-col min-h-screen">
     <x-header></x-header>
 
-    <!-- Hero Section -->
-    <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog`chasiga xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Sevinch - 475-chi sonli bolalar bog`chasi innovatsiya ta'limning mukammalligiga javob beradi</p>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="container mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
-            <h2 class="text-4xl font-bold text-blue-900">422+</h2>
-            <p class="text-gray-600">Bog'chada Faoliyat Olib Boradigan Hodimlar</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
-            <h2 class="text-4xl font-bold text-blue-900">37+</h2>
-            <p class="text-gray-600">Malakali Hodimlar</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md stat-box text-center">
-            <h2 class="text-4xl font-bold text-blue-900">100%</h2>
-            <p class="text-gray-600">Bitiruv Darajasi</p>
+    <!-- Page Header -->
+    <section class="relative bg-blue-900 py-24 object-cover object-center bg-no-repeat bg-cover" style="background-image: linear-gradient(rgba(12, 9, 80, 0.8), rgba(22, 17, 121, 0.8)), url('{{ asset('image/orig.jpeg') }}');">
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <h1 class="text-5xl font-bold text-white mb-6 font-serif tracking-wide">{{ __('messages.news') }}</h1>
+            <p class="text-xl text-blue-100 max-w-2xl mx-auto font-light">
+                {{ __('messages.news_desc') }}
+            </p>
+            <div class="w-24 h-1 bg-yellow-400 mx-auto mt-8"></div>
         </div>
     </section>
 
-    <!-- Latest News Section -->
-        <section id="news" class="py-20">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="inline-block mb-4 bg-cyan-600/10 text-cyan-600 border border-cyan-600/20 px-3 py-1 rounded-full text-sm">
-                    Yangiliklar
-                </span>
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">So'nggi yangiliklar</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Bog'chamizning so'nggi yangiliklari va tadbirlari bilan tanishing
-                </p>
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-16">
+        <!-- Breadcrumb -->
+        <div class="mb-8 flex items-center justify-center text-xs text-gray-400 uppercase tracking-widest font-bold">
+            <a href="/" class="hover:text-blue-600 transition-colors">
+                <i class="fas fa-home mr-1"></i>{{ __('messages.breadcrumb_home') }}
+            </a>
+            <span class="mx-3 text-gray-300">/</span>
+            <span class="text-blue-600">{{ __('messages.news') }}</span>
+        </div>
+
+        @if($news->count() > 0)
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                @foreach($news as $item)
+                    <div class="bg-white rounded-2xl shadow-lg hover-lift overflow-hidden border border-gray-100 flex flex-col h-full">
+                        <div class="aspect-[16/10] overflow-hidden relative group">
+                            @if($item->image)
+                                <img
+                                    src="{{ asset('storage/' . $item->image) }}"
+                                    alt="{{ $item->title }}"
+                                    class="w-full h-full object-cover hover-scale"
+                                />
+                            @else
+                                <div class="w-full h-full bg-gray-200 flex items-center justify-center hover-scale">
+                                    <i class="fas fa-image text-4xl text-gray-400"></i>
+                                </div>
+                            @endif
+                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-blue-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                {{ $item->published_at ? $item->published_at->format('d.m.Y') : $item->created_at->format('d.m.Y') }}
+                            </div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-800 mb-3 line-clamp-2 hover:text-blue-600 transition-colors cursor-pointer">
+                                {{ $item->title }}
+                            </h3>
+                            <p class="text-gray-600 mb-6 line-clamp-3 text-sm leading-relaxed flex-grow">
+                                {{ $item->excerpt ?? \Illuminate\Support\Str::limit($item->content, 120) }}
+                            </p>
+                            <button @click="$dispatch('open-news-modal', { 
+                                    title: '{{ addslashes(str_replace(\"\\n\", \" \", $item->title)) }}', 
+                                    date: '{{ $item->published_at ? $item->published_at->format('d.m.Y') : $item->created_at->format('d.m.Y') }}', 
+                                    content: '{{ addslashes(str_replace(\"\\n\", \"<br>\", $item->content)) }}', 
+                                    image: '{{ $item->image ? asset('storage/' . $item->image) : '' }}' 
+                                })"
+                               class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors group mt-auto">
+                                {{ __('messages.more_details') }}
+                                <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- News Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover-lift overflow-hidden">
-                    <div class="aspect-video overflow-hidden">
-                        <img
-                            src="/modern-chemistry-laboratory-with-students.jpg"
-                            alt="Yangi laboratoriya ochildi"
-                            class="w-full h-full object-cover hover-scale transition-transform duration-300"
-                        />
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h8m-8 0H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2"></path>
-                            </svg>
-                            15.01.2025
-                        </div>
-                        <h3 class="text-lg font-semibold hover:text-cyan-600 transition-colors mb-2">Yangi laboratoriya ochildi</h3>
-                        <p class="text-gray-600 mb-4">Zamonaviy kimyo laboratoriyasi talabalar uchun ochildi</p>
-                        <button class="text-cyan-600 hover:text-cyan-700 transition-colors flex items-center">
-                            Batafsil o'qish
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </div>
+            <!-- Pagination -->
+            @if ($news->hasPages())
+            <div class="mt-16 flex justify-center">
+                {{ $news->links('pagination::tailwind') }}
+            </div>
+            @endif
+        @else
+            <!-- No News State -->
+            <div class="bg-white rounded-3xl shadow-xl p-16 text-center max-w-2xl mx-auto border border-gray-100">
+                <div class="w-24 h-24 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i class="far fa-newspaper text-5xl text-blue-400"></i>
                 </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">{{ __('messages.no_news') }}</h2>
+                <p class="text-gray-500 mb-8">{{ __('messages.not_found_desc') }}</p>
+                <a href="{{ route('home') }}" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-xl transition shadow-lg hover:-translate-y-1">
+                    <i class="fas fa-home mr-2"></i>{{ __('messages.breadcrumb_home') }}
+                </a>
+            </div>
+        @endif
+    </main>
 
-                <!-- News Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover-lift overflow-hidden">
-                    <div class="aspect-video overflow-hidden">
-                        <img
-                            src="/international-partnership-signing-ceremony.jpg"
-                            alt="Xalqaro hamkorlik kengaydi"
-                            class="w-full h-full object-cover hover-scale transition-transform duration-300"
-                        />
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h8m-8 0H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2"></path>
-                            </svg>
-                            10.01.2025
-                        </div>
-                        <h3 class="text-lg font-semibold hover:text-cyan-600 transition-colors mb-2">Xalqaro hamkorlik kengaydi</h3>
-                        <p class="text-gray-600 mb-4">Italiya universitetlari bilan yangi shartnomalar imzolandi</p>
-                        <button class="text-cyan-600 hover:text-cyan-700 transition-colors flex items-center">
-                            Batafsil o'qish
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+    <!-- News Detail Modal -->
+    <div x-data="{ 
+            open: false, 
+            news: null 
+         }" 
+         @open-news-modal.window="news = $event.detail; open = true; document.body.style.overflow = 'hidden';"
+         class="relative z-[100]" x-cloak>
+        
+        <div x-show="open" 
+             x-transition.opacity 
+             class="fixed inset-0 bg-gray-900/80 backdrop-blur-sm transition-opacity" 
+             aria-hidden="true"></div>
 
-                <!-- News Card 3 -->
-                <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover-lift overflow-hidden">
-                    <div class="aspect-video overflow-hidden">
-                        <img
-                            src="/students-celebrating-victory-at-international-olym.jpg"
-                            alt="Talabalar yutuqlari"
-                            class="w-full h-full object-cover hover-scale transition-transform duration-300"
-                        />
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h8m-8 0H6a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V9a2 2 0 00-2-2h-2"></path>
-                            </svg>
-                            05.01.2025
+        <div x-show="open" 
+             x-transition:enter="ease-out duration-300" 
+             x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+             x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100" 
+             x-transition:leave="ease-in duration-200" 
+             x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+             x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+             class="fixed inset-0 w-screen h-screen overflow-y-auto" 
+             @click.away="open = false; document.body.style.overflow = '';">
+            
+            <div class="flex min-h-full items-center justify-center p-4 text-center sm:p-0">
+                <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl border border-gray-100 w-full" @click.stop>
+                    
+                    <!-- Close button -->
+                    <button @click="open = false; document.body.style.overflow = '';" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-gray-500 hover:text-red-500 hover:bg-red-50 transition-colors shadow-sm focus:outline-none">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+
+                    <template x-if="news">
+                        <div>
+                            <!-- Header Image -->
+                            <div class="w-full h-64 sm:h-80 bg-gray-100 relative overflow-hidden">
+                                <template x-if="news.image">
+                                    <img :src="news.image" :alt="news.title" class="w-full h-full object-cover">
+                                </template>
+                                <template x-if="!news.image">
+                                    <div class="w-full h-full flex items-center justify-center">
+                                        <i class="fas fa-newspaper text-6xl text-gray-300"></i>
+                                    </div>
+                                </template>
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                                <div class="absolute bottom-6 left-6 right-6 text-white">
+                                    <div class="flex items-center text-sm font-medium text-blue-200 mb-3 bg-white/20 backdrop-blur-md w-max px-3 py-1.5 rounded-lg">
+                                        <i class="fas fa-calendar-alt mr-2"></i>
+                                        <span x-text="news.date"></span>
+                                    </div>
+                                    <h2 class="text-2xl sm:text-3xl font-bold leading-tight" x-text="news.title"></h2>
+                                </div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="px-6 py-10 sm:px-10 max-h-[50vh] overflow-y-auto">
+                                <div class="prose prose-blue max-w-none text-gray-700 leading-relaxed font-sans" x-html="news.content"></div>
+                            </div>
+                            
+                            <!-- Footer -->
+                            <div class="bg-gray-50 px-6 py-6 sm:flex sm:flex-row-reverse sm:px-10 border-t border-gray-100">
+                                <button type="button" 
+                                        @click="open = false; document.body.style.overflow = '';" 
+                                        class="inline-flex w-full justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 sm:w-auto transition-colors focus:outline-none">
+                                    {{ __('messages.close') }}
+                                </button>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-semibold hover:text-cyan-600 transition-colors mb-2">Talabalar yutuqlari</h3>
-                        <p class="text-gray-600 mb-4">Bizning talabalar xalqaro olimpiadada g'olib bo'ldi</p>
-                        <button class="text-cyan-600 hover:text-cyan-700 transition-colors flex items-center">
-                            Batafsil o'qish
-                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </div>
+                    </template>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
     <x-footer></x-footer>
 
-    <!-- JavaScript for menu toggle -->
     <script>
-        $(document).ready(function() {
-            $('#menuToggle').click(function() {
-                $('#mainMenu').toggleClass('show');
-                $(this).toggleClass('active');
-            });
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobileMenuBtn');
+            const nav = document.getElementById('mainNav');
+            if (btn && nav) {
+                btn.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    btn.classList.toggle('active');
+                });
+            }
         });
     </script>
-
-    <!-- JavaScript for Slider -->
-    <script>
-        jQuery(document).ready(function($) {
-            console.log("jQuery working!");
-
-            // Slider functionality
-            const $sliderImages = $('.slider-images');
-            const $slides = $('.slider-img');
-            const $prevBtn = $('#prev-btn');
-            const $nextBtn = $('#next-btn');
-            const slideWidth = $slides.first().outerWidth(true); // Including margins
-            const totalSlides = $slides.length;
-            let currentIndex = 0;
-
-            // Dynamically add dots based on the number of slides
-            for (let i = 0; i < totalSlides; i++) {
-                $('.slider-dots').append(`<span class="dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`);
-            }
-
-
-            const $dots = $('.dot');
-
-            // Function to update slider position and active states
-            function updateSlider() {
-                $sliderImages.css('transform', `translateX(-${currentIndex * slideWidth}px)`);
-                $slides.removeClass('active');
-                $slides.eq(currentIndex).addClass('active');
-                $dots.removeClass('active').eq(currentIndex).addClass('active');
-            }
-
-            // Next button click handler
-            $nextBtn.on('click', function() {
-                if (currentIndex < totalSlides - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0; // Loop back to the first slide
-                }
-                updateSlider();
-            });
-
-            // Previous button click handler
-            $prevBtn.on('click', function() {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = totalSlides - 1; // Loop to the last slide
-                }
-                updateSlider();
-            });
-
-            // Dot click handler
-            $dots.on('click', function() {
-                currentIndex = parseInt($(this).data('index'));
-                updateSlider();
-            });
-
-            // Auto-slide every 5 seconds
-            setInterval(function() {
-                if (currentIndex < totalSlides - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-                updateSlider();
-            }, 5000);
-
-            // Initial update
-            updateSlider();
-        });
-    </script>
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'922f25ba8e57d684',t:'MTc0MjQxMDE0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

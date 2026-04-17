@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HomeSlider extends Model
 {
-    protected $fillable = ['name', 'subject', 'image', 'bio', 'staff_category_id'];
+    protected $fillable = ['name', 'subject', 'image', 'bio', 'staff_category_id', 'experience', 'languages', 'education', 'award', 'phone'];
 
     public function staffCategory()
     {

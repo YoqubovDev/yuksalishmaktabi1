@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         // 1. Seed Staff / Leadership
         $this->call(StaffSeeder::class);
         $this->call(GroupStudentSeeder::class);
+        $this->call(AchievementSeeder::class);
+        $this->call(ContactSeeder::class);
+        $this->call(ReceptionSeeder::class);
 
         // 2. About Statistics
         AboutStatic::firstOrCreate([
@@ -38,13 +41,7 @@ class DatabaseSeeder extends Seeder
             'tashqi' => '40',
         ]);
 
-        // 4. Exam Statistics (Wait, it says cefr, universitet, ielts, sat)
-        ExamStats::firstOrCreate([
-            'cefr' => '85',
-            'universitet' => '95',
-            'ielts' => '7.5',
-            'sat' => '1200',
-        ]);
+
 
         // 5. News
         $newsItems = [
@@ -84,34 +81,6 @@ class DatabaseSeeder extends Seeder
             );
         }
 
-        // 6. Achievements
-        $achievements = [
-            [
-                'name' => 'Eng Yaxshi Bog\'cha - 2024',
-                'badge' => 'Oltin medal',
-                'description' => 'Ta\'lim sifati bo\'yicha respublika ko\'rik tanlovi g\'olibi.',
-                'category' => 'Respublika',
-                'image' => null,
-            ],
-            [
-                'name' => 'Innovatsion Ta\'lim',
-                'badge' => 'Maxsus mukofot',
-                'description' => 'Bolalarni maktabga tayyorlashda innovatsion yondashuv uchun.',
-                'category' => 'Viloyat',
-                'image' => null,
-            ]
-        ];
 
-        foreach ($achievements as $ach) {
-            Achievement::firstOrCreate(
-                ['name' => $ach['name']],
-                [
-                    'badge' => $ach['badge'],
-                    'description' => $ach['description'],
-                    'category' => $ach['category'],
-                    'image' => $ach['image'],
-                ]
-            );
-        }
     }
 }

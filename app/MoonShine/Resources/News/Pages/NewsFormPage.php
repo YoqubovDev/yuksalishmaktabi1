@@ -40,6 +40,10 @@ class NewsFormPage extends FormPage
                     ->placeholder("Yangilik sarlavhasi — qisqa va aniq (50–80 belgi).")
                     ->required(),
 
+                Textarea::make('Qisqacha matn', 'excerpt')
+                    ->nullable()
+                    ->placeholder("Yangilik haqida qisqacha ma'lumot (bosh sahifada ko'rinadi)."),
+
                 Textarea::make('To‘liq matn', 'content')
                     ->nullable()
                     ->placeholder("To‘liq maqola matni. WYSIWYG uchun Trix yoki Editor field bilan almashtirish mumkin."),
