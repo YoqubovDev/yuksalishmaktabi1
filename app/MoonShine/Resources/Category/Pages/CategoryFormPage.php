@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Staff\Pages;
+namespace App\MoonShine\Resources\Category\Pages;
 
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
@@ -10,7 +10,7 @@ use MoonShine\Contracts\UI\FormBuilderContract;
 use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
-use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Category\CategoryResource;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
@@ -19,9 +19,9 @@ use Throwable;
 
 
 /**
- * @extends FormPage<StaffResource>
+ * @extends FormPage<CategoryResource>
  */
-class StaffFormPage extends FormPage
+class CategoryFormPage extends FormPage
 {
     /**
      * @return list<ComponentContract|FieldContract>
@@ -32,7 +32,7 @@ class StaffFormPage extends FormPage
             Box::make('Kategoriya qo\'shish', [
                 ID::make(),
                 Text::make('Kategoriya nomi', 'category')->required()
-                    ->placeholder('Masalan: Tarbiyachi yoki Yordam tarbiyachi'),
+                    ->placeholder('Masalan: Tarbiyachi yoki Yordam tarbiyachi .....'),
             ]),
         ];
     }

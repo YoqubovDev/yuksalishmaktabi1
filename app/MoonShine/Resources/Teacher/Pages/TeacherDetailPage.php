@@ -14,8 +14,9 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
-use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Category\CategoryResource;
 use App\MoonShine\Resources\Group\GroupResource;
+use MoonShine\UI\Fields\Textarea;
 use Throwable;
 
 
@@ -34,13 +35,12 @@ class TeacherDetailPage extends DetailPage
             Text::make('Ism', 'name'),
 
             // Kategoriya: Tarbiyachi yoki Yordam tarbiyachi
-            BelongsTo::make('Kategoriya', 'staff', 'category', StaffResource::class),
+            BelongsTo::make('Kategoriya', 'category', 'category', CategoryResource::class),
 
-            // Biriktirilgan guruh
-            BelongsTo::make('Guruh', 'group', 'name', GroupResource::class),
+            // // Biriktirilgan guruh
+            // BelongsTo::make('Guruh', 'group', 'name', GroupResource::class),
 
-            Text::make('Lavozim', 'subject'),
-            Text::make('Bio', 'bio'),
+            Textarea::make('Bio', 'bio'),
             Image::make('Rasm', 'image'),
         ];
     }

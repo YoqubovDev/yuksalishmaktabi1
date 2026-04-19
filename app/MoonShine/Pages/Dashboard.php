@@ -50,17 +50,13 @@ class Dashboard extends Page
     protected function components(): iterable
     {
         // Asosiy ma'lumotlar - faqat kerakli narsalar
-        $teacherStats = TeacherStats::first();
-        $examStats = ExamStats::first();
+
         
         // Asosiy statistikalar
         $totalTeachers = Teacher::count();
-        $totalCourses = Course::count();
         $totalGroups = Group::count();
-        $totalStudents = Course::sum('student_count') ?? 0;
         $totalNews = News::count();
         $totalAchievements = Achievement::count();
-        $totalVideos = Video::count();
         $totalDepartments = Departments::count();
         
         // O'qituvchilar statistikasi
@@ -74,9 +70,7 @@ class Dashboard extends Page
         $universitet = $examStats?->universitet ?? 0;
         $ielts = $examStats?->ielts ?? 0;
         $sat = $examStats?->sat ?? 0;
-        
-        // Kurslar ma'lumotlari
-        $courses = Course::withCount('videos')->take(10)->get();
+
         
         return [
             // Asosiy statistikalar - faqat muhim narsalar
@@ -86,19 +80,9 @@ class Dashboard extends Page
                         ->value($totalTeachers)
                         ->icon('users'),
                 ])->columnSpan(12, 6, 3),
+
                 
-                Column::make([
-                    ValueMetric::make('Jami Talabalar')
-                        ->value($totalStudents)
-                        ->valueFormat(fn($value) => number_format($value))
-                        ->icon('academic-cap'),
-                ])->columnSpan(12, 6, 3),
-                
-                Column::make([
-                    ValueMetric::make('Jami Kurslar')
-                        ->value($totalCourses)
-                        ->icon('book-open'),
-                ])->columnSpan(12, 6, 3),
+
                 
                 Column::make([
                     ValueMetric::make('Jami Guruhlar')
@@ -121,11 +105,11 @@ class Dashboard extends Page
                         ->icon('trophy'),
                 ])->columnSpan(12, 6, 3),
                 
-                Column::make([
-                    ValueMetric::make('Videolar')
-                        ->value($totalVideos)
-                        ->icon('video-camera'),
-                ])->columnSpan(12, 6, 3),
+//                Column::make([
+//                    ValueMetric::make('Videolar')
+//                        ->value($totalVideos)
+//                        ->icon('video-camera'),
+//                ])->columnSpan(12, 6, 3),
                 
                 Column::make([
                     ValueMetric::make('Bo\'limlar')
@@ -147,14 +131,7 @@ class Dashboard extends Page
                 ])->columnSpan(12, 6, 6),
             ]),
             
-            // Kurslar statistikasi - faqat mavjud kurslar
-            ...($courses->isNotEmpty() ? [
-                Grid::make([
-                    Column::make([
-                        $this->createCoursesChart($courses),
-                    ])->columnSpan(12, 12, 12),
-                ])
-            ] : []),
+
         ];
     }
     

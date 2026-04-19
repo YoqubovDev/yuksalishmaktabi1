@@ -2,69 +2,38 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Staff\Pages;
+namespace App\MoonShine\Resources\Category\Pages;
 
-use MoonShine\Laravel\Pages\Crud\IndexPage;
+use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use MoonShine\Laravel\QueryTags\QueryTag;
-use MoonShine\UI\Components\Metrics\Wrapped\Metric;
+use App\MoonShine\Resources\Category\CategoryResource;
+use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
-use App\MoonShine\Resources\Staff\StaffResource;
-use MoonShine\Support\ListOf;
 use Throwable;
 
 
 /**
- * @extends IndexPage<StaffResource>
+ * @extends DetailPage<CategoryResource>
  */
-class StaffIndexPage extends IndexPage
+class CategoryDetailPage extends DetailPage
 {
-    protected bool $isLazy = true;
-
     /**
      * @return list<FieldContract>
      */
     protected function fields(): iterable
     {
         return [
-            ID::make()->sortable(),
-            Text::make('Kategoriya nomi', 'category')->sortable(),
+            ID::make(),
+            Text::make('Kategoriya nomi', 'category'),
         ];
     }
 
-    /**
-     * @return ListOf<ActionButtonContract>
-     */
     protected function buttons(): ListOf
     {
         return parent::buttons();
-    }
-
-    /**
-     * @return list<FieldContract>
-     */
-    protected function filters(): iterable
-    {
-        return [];
-    }
-
-    /**
-     * @return list<QueryTag>
-     */
-    protected function queryTags(): array
-    {
-        return [];
-    }
-
-    /**
-     * @return list<Metric>
-     */
-    protected function metrics(): array
-    {
-        return [];
     }
 
     /**
@@ -72,7 +41,7 @@ class StaffIndexPage extends IndexPage
      *
      * @return TableBuilder
      */
-    protected function modifyListComponent(ComponentContract $component): ComponentContract
+    protected function modifyDetailComponent(ComponentContract $component): ComponentContract
     {
         return $component;
     }

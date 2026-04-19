@@ -34,7 +34,7 @@ class GroupIndexPage extends IndexPage
         return [
             ID::make()->sortable(),
             Text::make('Nomi', 'name'),
-            Text::make('Yonalish' ,'direction')->required(),
+            Text::make('Til' ,'language')->required(),
             Text::make('Oquvchi soni' ,'schedule_image'),
             Number::make('Natija foizi', 'result_percentage')->nullable(),
             Image::make(' Guruh Rasmi ', 'image'),

@@ -9,15 +9,17 @@ class Group extends Model
 {
     protected $fillable = [
         'name',
-        'direction',
+        'language',
         'image',
-        'schedule_image',
+        'group_image',
         'result_percentage',
     ];
 
     /**
      * Bu guruhga biriktirilgan barcha tarbiyachilar
      */
+
+
     public function teachers(): HasMany
     {
         return $this->hasMany(Teacher::class, 'group_id');

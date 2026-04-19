@@ -26,7 +26,7 @@ use App\MoonShine\Resources\Video\VideoResource;
 use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
 use App\MoonShine\Resources\ExamStats\ExamStatsResource;
-use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Category\CategoryResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -61,17 +61,17 @@ final class MoonShineLayout extends AppLayout
 
 
             MenuGroup::make("Tarbiyachilar", [
-                MenuItem::make(StaffResource::class, 'Staff')->icon('users'),
+                MenuItem::make(CategoryResource::class, 'Category')->icon('users'),
                 // MenuItem::make(TeacherStatsResource::class)->icon('presentation-chart-line'),
                 MenuItem::make(TeacherResource::class)->icon("user"),
-                MenuItem::make(DepartmentsResource::class)->icon("building-office-2"),
+                MenuItem::make(GroupResource::class)->icon('user-group'),
+//                MenuItem::make(DepartmentsResource::class)->icon("building-office-2"),
 
 
             ])->icon("users"),
 
 
             MenuGroup::make("Dars jarayonlari", [
-                MenuItem::make(GroupResource::class)->icon('user-group'),
                 MenuItem::make(CourseResource::class)->icon('book-open'),
                 // MenuItem::make(VideoResource::class)->icon('video-camera'),
 

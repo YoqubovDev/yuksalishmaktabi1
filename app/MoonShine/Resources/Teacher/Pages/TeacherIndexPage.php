@@ -16,7 +16,7 @@ use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
-use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Category\CategoryResource;
 use App\MoonShine\Resources\Group\GroupResource;
 use Throwable;
 
@@ -37,13 +37,11 @@ class TeacherIndexPage extends IndexPage
             ID::make()->sortable(),
             Image::make('Rasm', 'image'),
             Text::make('Ism', 'name'),
-            Text::make('Fan / Lavozim', 'subject'),
-
             // Kategoriya: Tarbiyachi yoki Yordam tarbiyachi
-            BelongsTo::make('Kategoriya', 'staff', 'category', StaffResource::class),
+            BelongsTo::make('Kategoriya', 'category', 'category', CategoryResource::class),
 
-            // Biriktirilgan guruh
-            BelongsTo::make('Guruh', 'group', 'name', GroupResource::class),
+            // // Biriktirilgan guruh
+            // BelongsTo::make('Guruh', 'group', 'name', GroupResource::class),
         ];
     }
 

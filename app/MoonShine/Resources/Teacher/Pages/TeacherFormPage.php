@@ -18,7 +18,7 @@ use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
-use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Category\CategoryResource;
 use App\MoonShine\Resources\Group\GroupResource;
 use Throwable;
 
@@ -37,23 +37,20 @@ class TeacherFormPage extends FormPage
             Box::make("Tarbiyachi qo'shish", [
                 ID::make(),
 
-                // Kategoriya: Tarbiyachi yoki Yordam tarbiyachi
-                BelongsTo::make('Kategoriya', 'staff', 'category', StaffResource::class)
-                    ->required()
-                    ->searchable(),
-
-                // Tarbiyachi biriktirilgan guruh
-                BelongsTo::make('Guruh', 'group', 'name', GroupResource::class)
-                    ->nullable()
-                    ->searchable(),
+                BelongsTo::make('Kategoriya', 'category', 'category', CategoryResource::class)
+                    ->required(),
 
                 Text::make('Ism', 'name')->required(),
-                Text::make('Fan / Lavozim', 'subject'),
-                Textarea::make('Bio', 'bio')->required(),
+
+                Textarea::make('Bio', 'bio')
+                    ->customAttributes([
+                        'rows' => 5
+                    ]),
+
                 Image::make('Rasm', 'image')
-                    ->removable()
                     ->dir('teachers')
-                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),
+                    ->removable(),
+
             ]),
         ];
     }

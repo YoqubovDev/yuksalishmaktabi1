@@ -30,7 +30,7 @@ class GroupDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Nomi', 'name'),
-            Text::make('Yonalish' ,'direction')->required(),
+            Text::make('Til' ,'language')->required(),
             Number::make('Natija foizi', 'result_percentage')->nullable(),
             Text::make('Oquvchi soni' ,'schedule_image'),
             Image::make('Guruh Rasmi ', 'image')

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\Group\Pages;
 
+use App\MoonShine\Resources\Teacher\TeacherResource;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FormBuilderContract;
@@ -16,6 +18,7 @@ use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Number;
+use MoonShine\UI\Fields\Select;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
@@ -34,8 +37,17 @@ class GroupFormPage extends FormPage
             Box::make([
                 ID::make()->sortable(),
                 Text::make('Nomi', 'name')->required(),
-                Text::make('Yonalish', 'direction')->required(),
-                Text::make('Oquvchilar soni', 'schedule_image')->required(),
+                Select::make('Til', 'language')
+                    ->options([
+                        'uz-icon' => 'O‘zbek tili',
+                        'ru-icon' => 'Rus tili',
+                    ])
+                    ->nullable()
+                    ->searchable(),
+                Text::make('Oquvchilar soni', 'group_image')->required(),
+                BelongsTo::make('Tarbiyalovchi', 'teacher', 'name', TeacherResource::class)
+                    ->nullable()
+                    ->searchable(),
                 Number::make('Natija foizi', 'result_percentage')->nullable(),
                 Image::make('Guruh Rasmi ', 'image')->dir('groups')->removable()->required()
                     ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),

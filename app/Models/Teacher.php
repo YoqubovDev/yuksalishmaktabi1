@@ -7,26 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Teacher extends Model
 {
-    protected $fillable = [
-        'name',
-        'subject',
-        'image',
-        'bio',
-        'staff_id',   // Kategoriya (Tarbiyachi / Yordam tarbiyachi)
-        'group_id',   // Biriktirilgan guruh
-    ];
+    protected $fillable = ['name', 'image', 'bio', 'category_id', 'group_id'];
 
-    /**
-     * Tarbiyachi tegishli bo'lgan kategoriya (Staff)
-     */
-    public function staff(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Staff::class, 'staff_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
-    /**
-     * Tarbiyachi biriktirilgan guruh
-     */
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class, 'group_id');

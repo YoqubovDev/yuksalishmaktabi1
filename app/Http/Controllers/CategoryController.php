@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Staff;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $staff = Staff::all();
-        return view('staff', compact('staff'));
+        $category = Category::all();
+        return view('category', compact('category'));
     }
 
     /**
@@ -35,7 +35,7 @@ class StaffController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Staff $staff)
+    public function show(Category $category)
     {
         //
     }
@@ -43,7 +43,7 @@ class StaffController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Staff $staff)
+    public function edit(Category $category)
     {
         //
     }
@@ -51,7 +51,7 @@ class StaffController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Staff $staff)
+    public function update(Request $request, Category $category)
     {
         //
     }
@@ -59,7 +59,7 @@ class StaffController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Staff $staff)
+    public function destroy(Category $category)
     {
         //
     }

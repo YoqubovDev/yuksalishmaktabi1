@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('direction');
+            $table->string('language');
             $table->string('image');
-            $table->string('schedule_image')->nullable(); // dars jadvali
+            $table->string('group_image')->nullable(); // dars jadvali
             $table->integer('result_percentage')->nullable();
             $table->timestamps();
         });
