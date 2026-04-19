@@ -2,28 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Video\Pages;
+namespace App\MoonShine\Resources\Staff\Pages;
 
-use App\MoonShine\Resources\Course\CourseResource;
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Pages\Crud\IndexPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\QueryTags\QueryTag;
 use MoonShine\UI\Components\Metrics\Wrapped\Metric;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
-use App\MoonShine\Resources\Video\VideoResource;
-use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\Text;
+use App\MoonShine\Resources\Staff\StaffResource;
+use MoonShine\Support\ListOf;
 use Throwable;
 
 
 /**
- * @extends IndexPage<VideoResource>
+ * @extends IndexPage<StaffResource>
  */
-class VideoIndexPage extends IndexPage
+class StaffIndexPage extends IndexPage
 {
     protected bool $isLazy = true;
 
@@ -34,18 +31,13 @@ class VideoIndexPage extends IndexPage
     {
         return [
             ID::make()->sortable(),
-            Text::make('Sarlavha', 'title'),
-            BelongsTo::make(
-                'Ours',
-                'course',
-                fn ($item) => $item?->title ?? '-',
-                CourseResource::class
-            )->nullable(),
-            Text::make('YouTube URL', 'url'),
-            Date::make('Sana', 'published_at'),
+            Text::make('Kategoriya nomi', 'category')->sortable(),
         ];
     }
 
+    /**
+     * @return ListOf<ActionButtonContract>
+     */
     protected function buttons(): ListOf
     {
         return parent::buttons();

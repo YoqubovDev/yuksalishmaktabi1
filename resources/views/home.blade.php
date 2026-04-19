@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Jizzax Shahar Yuksalish maktabi</title>
+  <title>Sevinch - 475-chi bolalar bog'chasi</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -14,7 +14,7 @@
         href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+  <link rel="icon" href="/image/sevinch-logo.png" type="image/png">
 
   <script>
     tailwind.config = {
@@ -669,8 +669,8 @@
       <div class="container">
           <div class="header-content">
               <div class="logo">
-                  <img style="border-radius: 500px" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="yuksalish-maktabi-al-logo.jpeg">
-                  <div class="logo-text">Jizzax Shahar Yuksalish Maktabi</div>
+                  <img src="/image/sevinch-logo.png" alt="Sevinch Logo">
+                  <div class="logo-text">Sevinch - 475-chi bolalar bog'chasi</div>
               </div>
               <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                   <i class="fas fa-bars menu-icon"></i>
@@ -754,7 +754,7 @@
             <span class="mr-2"><i class="fas fa-graduation-cap"></i></span>
               bilim innovatsiyaga yo‘li
           </p>
-            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow">Jizzax Shahar Yuksalish maktabi bilan</h3>
+            <h3 class="text-5xl md:text-6xl font-serif mb-10 text-center hero-text-shadow">Sevinch - 475-chi sonli bolalar bog'chasi bilan</h3>
             <h2 class="text-6xl md:text-7xl font-serif mb-4 text-center hero-text-shadow font-bold">Kelajagingni kashf et</h2>
           <p class="text-lg max-w-2xl text-center mb-12 font-light">Zehinlilarni tarbiyalaymiz, yetakchilarni voyaga yetkazamiz. Bugunoq jonli va faol akademik hamjamiyatimizga qo‘shiling.</p>
         </div>
@@ -810,7 +810,7 @@
 
   <section class="py-20 bg-gray-50" x-data="{ showModal: false, imageUrl: '' }">
       <div class="container mx-auto px-4">
-          <h3 class="text-4xl font-extrabold text-blue-900 mb-12 text-center">Qabul Rasmlari</h3>
+          <h3 class="text-4xl font-extrabold text-blue-900 mb-12 text-center">Tadbir Rasmlari</h3>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-10">
               @foreach($qabulrasmis as $rasm)
@@ -844,22 +844,22 @@
       <div class="bg-white rounded-lg shadow-lg p-8">
         <h2 class="text-4xl font-bold text-unipix-blue text-center mb-8">Biz Haqimizda</h2>
         <p class="text-gray-600 text-lg mb-6">
-            Yuksalish maktabi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat talabalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
+            Sevinch - 475-chi sonli bolalar bog'chasi ta'lim, innovatsiya va rivojlanish markazi. Bizning asosiy maqsadimiz nafaqat bolalarga bilim berish, balki ularni kelajakdagi muvaffaqiyatli hayotga tayyorlashdir.
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Afzalliklarimiz</h3>
         <ul class="list-disc list-inside text-gray-600 mb-6 space-y-2">
-          <li><strong>Professional o'qituvchilar:</strong>Maktabimiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
+          <li><strong>Professional tarbiyachilar:</strong>Bog'chamiz o'z sohalari bo'yicha yuqori malakaga ega bo'lgan tajribali pedagoglar.</li>
           <li><strong>Innovatsion metodologiyalar:</strong> O'qitish zamonaviy texnologiyalar va interfaol ta'lim usullaridan foydalangan holda amalga oshiriladi.</li>
           <li><strong>Amaliy o'quv jarayoni:</strong> Haqiqiy loyihalar va amaliy mashg'ulotlar orqali nazariy bilimlarni mustahkamlash imkoniyati.</li>
           <li><strong>Global yondashuv:</strong> Talabalarga xalqaro standartlarga javob beradigan bilim va ko'nikmalar beriladi.</li>
         </ul>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Tariximiz</h3>
         <p class="text-gray-600 text-lg mb-6">
-            2023 yilda tashkil etilgan Jizzax shahridagi Yuksalish maktab O'zbekiston yoshlariga sifatli ta'lim berish maqsadida tashkil etilgan. 450 nafar o'quvchiga mo'ljallangan  maktabi milliy ta'lim standartlariga asoslangan zamonaviy o'quv muhitini taklif etadi. U talabalarni fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha qat'iy dasturlar orqali tayyorlaydi. Qabul ingliz tilidagi rasmiy intervyu bilan bir qatorda matematika, fizika va ingliz tilidagi test natijalariga asoslanadi. Yuksalish maktabi o'quvchilarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi martabalariga erishishda g'urur bilan qo'llab-quvvatlaydi.
+            2023 yilda tashkil etilgan Sevinch - 475-chi sonli bolalar bog'chasi O'zbekiston yoshlariga sifatli ta'lim berish maqsadida tashkil etilgan. 450 nafar bolaga mo'ljallangan bog'cha milliy ta'lim standartlariga asoslangan zamonaviy o'quv muhitini taklif etadi. Sevinch bog'chasi bolalarni kuchli ilmiy asoslar va professional ustozlik orqali akademik maqsadlariga va kelajakdagi hayotiga erishishda g'urur bilan qo'llab-quvvatlaydi.
         </p>
         <h3 class="text-2xl font-semibold text-unipix-blue mb-4">Bizning Missiyamiz</h3>
         <p class="text-gray-600 text-lg mb-6">
-            Bizning vazifamiz talabalarga akademik salohiyati va shaxsiy o'sishini ta'minlaydigan yuqori sifatli ta'lim berishdir. Biz talabalar fan, texnologiya, muhandislik, matematika va gumanitar fanlar bo'yicha chuqur bilim olishlari mumkin bo'lgan dinamik o'quv muhitini ta'minlashga intilamiz. Tajribali fakulteti orqali, zamonaviy inshootlari, va mukammallikni uchun majburiyat, biz universitet uchun emas, balki faqat bizning talabalarga tayyorlash, lekin ularning kelajakda martaba muvaffaqiyat va jamiyat uchun mazmunli hissasi uchun.
+            Bizning vazifamiz bolalarga akademik salohiyati va shaxsiy o'sishini ta'minlaydigan yuqori sifatli ta'lim berishdir. Biz bolalar fan va ijod bo'yicha chuqur bilim olishlari mumkin bo'lgan dinamik o'quv muhitini ta'minlashga intilamiz.
         </p>
       </div>
     </div>
@@ -868,7 +868,7 @@
   <!-- Team Section -->
   <section class="py-16 bg-gray-50">
       <div class="container mx-auto px-4">
-          <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">Yuksalish Maktab Rahbariyati</h3>
+          <h3 class="text-3xl font-bold text-blue-900 mb-10 text-center">Sevinch 475 Rahbariyati</h3>
 
           <div class="swiper teacherSwiper">
               <div class="swiper-wrapper">

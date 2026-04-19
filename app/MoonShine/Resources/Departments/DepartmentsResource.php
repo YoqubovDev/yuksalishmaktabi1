@@ -20,7 +20,7 @@ class DepartmentsResource extends ModelResource
 {
     protected string $model = Departments::class;
 
-    protected string $title = "Bo'limlarimiz";
+    protected string $title = "Guruh yaratish";
 
     /**
      * @return list<class-string<PageContract>>

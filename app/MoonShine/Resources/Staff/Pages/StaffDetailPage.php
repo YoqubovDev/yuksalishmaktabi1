@@ -2,26 +2,23 @@
 
 declare(strict_types=1);
 
-namespace App\MoonShine\Resources\Video\Pages;
+namespace App\MoonShine\Resources\Staff\Pages;
 
-use App\MoonShine\Resources\Course\CourseResource;
-use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Laravel\Pages\Crud\DetailPage;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
-use App\MoonShine\Resources\Video\VideoResource;
+use App\MoonShine\Resources\Staff\StaffResource;
 use MoonShine\Support\ListOf;
-use MoonShine\UI\Fields\Date;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
 use Throwable;
 
 
 /**
- * @extends DetailPage<VideoResource>
+ * @extends DetailPage<StaffResource>
  */
-class VideoDetailPage extends DetailPage
+class StaffDetailPage extends DetailPage
 {
     /**
      * @return list<FieldContract>
@@ -30,15 +27,7 @@ class VideoDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Sarlavha', 'title'),
-            BelongsTo::make(
-                'Kurs',
-                'course',
-                fn ($item) => $item?->title ?? '-',
-                CourseResource::class
-            )->nullable(),
-            Text::make('YouTube URL', 'url'),
-            Date::make('Sana', 'published_at'),
+            Text::make('Kategoriya nomi', 'category'),
         ];
     }
 

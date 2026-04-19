@@ -2,8 +2,8 @@
 
     <!-- Hero Section -->
     <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Jizzax Shahar Yuksalish maktabiga xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Jizzax Shahar Yuksalish Maktabi innovatsiya ta'limning mukammalligiga javob beradi</p>
+        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog'chasiga xush kelibsiz!</h1>
+        <p class="text-lg mt-4">Sevinch bolalar bog'chasi innovatsiya va ta'limning mukammalligiga javob beradi</p>
     </section>
 
     <!-- Statistics Section -->

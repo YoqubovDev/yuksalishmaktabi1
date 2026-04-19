@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jizzax Shahar Yuksalish Maktabi</title>
+    <title>Sevinch - 475-chi bolalar bog'chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+  <link rel="icon" href="/image/sevinch-logo.png" type="image/png">
 
     <script>
         tailwind.config = {
@@ -751,8 +751,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img style="border-radius: 500px" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="yuksalish-maktabi-al-logo.jpeg">
-                    <div class="logo-text">Jizzax Shahar Yuksalish Maktabi</div>
+                    <img src="/image/sevinch-logo.png" alt="Sevinch 475 Logo">
+                    <div class="logo-text">Sevinch - 475-chi bolalar bog'chasi</div>
                 </div>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                     <i class="fas fa-bars menu-icon"></i>

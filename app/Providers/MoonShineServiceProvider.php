@@ -21,10 +21,10 @@ use App\MoonShine\Resources\PhotoCard\PhotoCardResource;
 use App\MoonShine\Resources\Reception\ReceptionResource;
 use App\MoonShine\Resources\Slider\SliderResource;
 use App\MoonShine\Resources\Teacher\TeacherResource;
-use App\MoonShine\Resources\Video\VideoResource;
 use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
 use App\MoonShine\Resources\ExamStats\ExamStatsResource;
+use App\MoonShine\Resources\Staff\StaffResource;
 
 class MoonShineServiceProvider extends ServiceProvider
 {
@@ -48,10 +48,10 @@ class MoonShineServiceProvider extends ServiceProvider
                 ReceptionResource::class,
                 SliderResource::class,
                 TeacherResource::class,
-                VideoResource::class,
                 AboutStaticResource::class,
                 TeacherStatsResource::class,
                 ExamStatsResource::class,
+                StaffResource::class,
             ])
             ->pages([
                 ...$core->getConfig()->getPages(),

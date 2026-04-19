@@ -11,12 +11,15 @@ use MoonShine\UI\Components\FormBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use App\MoonShine\Resources\Teacher\TeacherResource;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
+use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Group\GroupResource;
 use Throwable;
 
 
@@ -31,12 +34,25 @@ class TeacherFormPage extends FormPage
     protected function fields(): iterable
     {
         return [
-            Box::make("O'qituvchilar qo'shish", [
+            Box::make("Tarbiyachi qo'shish", [
                 ID::make(),
+
+                // Kategoriya: Tarbiyachi yoki Yordam tarbiyachi
+                BelongsTo::make('Kategoriya', 'staff', 'category', StaffResource::class)
+                    ->required()
+                    ->searchable(),
+
+                // Tarbiyachi biriktirilgan guruh
+                BelongsTo::make('Guruh', 'group', 'name', GroupResource::class)
+                    ->nullable()
+                    ->searchable(),
+
                 Text::make('Ism', 'name')->required(),
-                Text::make('Fan', 'subject'),
-                Textarea::make('Bio' , 'bio')->required(),
-                Image::make('Rasm', 'image')->removable()
+                Text::make('Fan / Lavozim', 'subject'),
+                Textarea::make('Bio', 'bio')->required(),
+                Image::make('Rasm', 'image')
+                    ->removable()
+                    ->dir('teachers')
                     ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),
             ]),
         ];

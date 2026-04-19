@@ -20,7 +20,12 @@ class TeacherResource extends ModelResource
 {
     protected string $model = Teacher::class;
 
-    protected string $title = "O'qituvchilar ";
+    protected string $title = "Tarbiyachi";
+
+    /**
+     * Eager load relationships to avoid N+1 queries
+     */
+    protected array $with = ['staff', 'group'];
 
     /**
      * @return list<class-string<PageContract>>

@@ -9,10 +9,13 @@ use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\UI\Components\Table\TableBuilder;
 use MoonShine\Contracts\UI\FieldContract;
 use App\MoonShine\Resources\Teacher\TeacherResource;
+use MoonShine\Laravel\Fields\Relationships\BelongsTo;
 use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Text;
+use App\MoonShine\Resources\Staff\StaffResource;
+use App\MoonShine\Resources\Group\GroupResource;
 use Throwable;
 
 
@@ -29,8 +32,15 @@ class TeacherDetailPage extends DetailPage
         return [
             ID::make(),
             Text::make('Ism', 'name'),
-            Text::make('Fan', 'subject'),
-            Text::make('Bio' , 'bio'),
+
+            // Kategoriya: Tarbiyachi yoki Yordam tarbiyachi
+            BelongsTo::make('Kategoriya', 'staff', 'category', StaffResource::class),
+
+            // Biriktirilgan guruh
+            BelongsTo::make('Guruh', 'group', 'name', GroupResource::class),
+
+            Text::make('Lavozim', 'subject'),
+            Text::make('Bio', 'bio'),
             Image::make('Rasm', 'image'),
         ];
     }

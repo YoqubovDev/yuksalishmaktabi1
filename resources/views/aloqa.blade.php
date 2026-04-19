@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aloqa - Jizzax Shahar Yuksalish Maktabi</title>
+    <title>Aloqa - Sevinch - 475-chi bolalar bog'chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+  <link rel="icon" href="/image/sevinch-logo.png" type="image/png">
 
     <style>
         .contact-card {
@@ -45,7 +45,7 @@
         <div class="mb-10 text-center">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Biz bilan bog'laning</h1>
             <p class="text-gray-600 max-w-2xl mx-auto">
-                Jizzax Shahar Yuksalish maktabi bilan bog'lanish uchun quyidagi ma'lumotlardan foydalanishingiz mumkin
+                Sevinch - 475-chi sonli bolalar bog'chasi bilan bog'lanish uchun quyidagi ma'lumotlardan foydalanishingiz mumkin
             </p>
             <div class="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>

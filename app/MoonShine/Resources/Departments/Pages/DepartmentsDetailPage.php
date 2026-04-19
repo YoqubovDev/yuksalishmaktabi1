@@ -13,7 +13,9 @@ use MoonShine\Support\ListOf;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
+use MoonShine\UI\Fields\Img;
 use MoonShine\UI\Fields\Textarea;
+use Nette\Utils\Image;
 use Throwable;
 
 
@@ -29,10 +31,10 @@ class DepartmentsDetailPage extends DetailPage
     {
         return [
             ID::make(),
-            Text::make('Bo‘lim nomi', 'name'),
-            Text::make('Ikonka class', 'icon'),
+            Text::make('Guruh nomi', 'name'),
+            Image::make('Guruh rasm', 'image'),
             Textarea::make('Taʼrif', 'description'),
-            Number::make('O‘qituvchilar soni', 'teachers_count'),
+            
         ];
     }
 

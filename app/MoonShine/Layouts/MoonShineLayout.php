@@ -26,6 +26,7 @@ use App\MoonShine\Resources\Video\VideoResource;
 use App\MoonShine\Resources\AboutStatic\AboutStaticResource;
 use App\MoonShine\Resources\TeacherStats\TeacherStatsResource;
 use App\MoonShine\Resources\ExamStats\ExamStatsResource;
+use App\MoonShine\Resources\Staff\StaffResource;
 
 final class MoonShineLayout extends AppLayout
 {
@@ -51,7 +52,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(HomeSliderResource::class)->icon('user-group'),
             ])->icon("home"),
 
-            MenuGroup::make("Maktab haqida", [
+            MenuGroup::make("Bog'cha haqida", [
 
                 MenuItem::make(AboutStaticResource::class)->icon('arrow-trending-up'),
                 MenuItem::make(NewsResource::class)->icon('megaphone'),
@@ -59,8 +60,9 @@ final class MoonShineLayout extends AppLayout
             ])->icon("building-library"),
 
 
-            MenuGroup::make("O'qituvchilar", [
-                MenuItem::make(TeacherStatsResource::class)->icon('presentation-chart-line'),
+            MenuGroup::make("Tarbiyachilar", [
+                MenuItem::make(StaffResource::class, 'Staff')->icon('users'),
+                // MenuItem::make(TeacherStatsResource::class)->icon('presentation-chart-line'),
                 MenuItem::make(TeacherResource::class)->icon("user"),
                 MenuItem::make(DepartmentsResource::class)->icon("building-office-2"),
 
@@ -71,7 +73,7 @@ final class MoonShineLayout extends AppLayout
             MenuGroup::make("Dars jarayonlari", [
                 MenuItem::make(GroupResource::class)->icon('user-group'),
                 MenuItem::make(CourseResource::class)->icon('book-open'),
-                MenuItem::make(VideoResource::class)->icon('video-camera'),
+                // MenuItem::make(VideoResource::class)->icon('video-camera'),
 
 
             ])->icon("academic-cap"),
@@ -93,6 +95,7 @@ final class MoonShineLayout extends AppLayout
                 MenuItem::make(SliderResource::class),
 
             ])->icon("wrench-screwdriver"),
+            
         ];
     }
 
@@ -104,5 +107,10 @@ final class MoonShineLayout extends AppLayout
         parent::colors($colorManager);
 
         // $colorManager->primary('#00000');
+    }
+
+    protected function footer(): string
+    {
+        return "";
     }
 }

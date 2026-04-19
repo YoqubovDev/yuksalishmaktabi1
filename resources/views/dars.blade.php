@@ -16,7 +16,7 @@
     </div>
 
     <main class="container mx-auto p-4">
-        <h2 class="text-3xl font-bold mb-8 text-blue-800 text-center">Yuksalish maktabi Guruhlar</h2>
+        <h2 class="text-3xl font-bold mb-8 text-blue-800 text-center">Sevinch 475 Guruhlar</h2>
 
         <!-- GROUP CARDS -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">

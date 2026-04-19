@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turin Akademik Litsey</title>
+    <title>Sevinch - 475-chi bolalar bog'chasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
@@ -571,8 +571,8 @@
 
     <!-- Hero Section -->
     <section class="bg-blue-900 text-white text-center py-20">
-        <h1 class="text-5xl font-bold">Turin Akademik litseyiga xush kelibsiz!</h1>
-        <p class="text-lg mt-4">Turin litseyi innovatsiya ta'limning mukammalligiga javob beradi</p>
+        <h1 class="text-5xl font-bold">Sevinch - 475-chi sonli bolalar bog'chasiga xush kelibsiz!</h1>
+        <p class="text-lg mt-4">Sevinch bolalar bog'chasi innovatsiya va ta'limning mukammalligiga javob beradi</p>
     </section>
 
     <!-- Statistics Section -->
