@@ -1,296 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dars jarayoni</title>
+</head>
+<body>
 <x-header></x-header>
 
-    <div class="container mx-auto py-4 px-4">
-        <div class="flex items-center text-gray-600 text-sm">
-            <a href="#" class="hover:text-blue-800 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                </svg>
-                Bosh sahifa
-            </a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            <span>Guruh rasmi</span>
+<div class="font-sans bg-gray-50" x-data="{
+    showModal: false,
+    selectedGroup: null,
+    zoomImage: false,
+    zoomedImageSrc: ''
+}">
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-900 via-unipix-blue to-blue-800 py-20">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute -left-16 top-10 h-72 w-72 rounded-full bg-white/20 blur-3xl"></div>
+            <div class="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-yellow-400/20 blur-3xl"></div>
+        </div>
+        <div class="container mx-auto relative z-10 px-4 text-center text-white">
+            <span class="inline-flex rounded-full bg-yellow-400/20 px-4 py-2 text-xs font-black uppercase tracking-[0.35em] text-yellow-100 mb-6">
+                Dars jarayoni
+            </span>
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-[0.03em] mb-6">Sevinch 475 guruhlari</h1>
+            <p class="mx-auto max-w-3xl text-lg leading-relaxed text-blue-100">
+                Har bir guruhimiz iqtidorli tarbiyachilar, yordamchi tarbiyachilar va malakali bolalar bilan ajoyib o'quv jarayoniga ega.
+            </p>
+        </div>
+    </section>
+
+    <!-- Groups Grid -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                @foreach($groups as $group)
+                <div class="group-card relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
+                     @click="selectedGroup = @json($group); showModal = true; zoomImage = false;">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="{{ asset('storage/' . $group->image) }}" alt="{{ $group->name }}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-950/10 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8">
+                            <h3 class="text-3xl font-black text-white">{{ $group->name }}</h3>
+                            <p class="mt-2 text-sm uppercase tracking-[0.25em] text-blue-200">{{ $group->direction }}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-8">
+                        <div class="flex items-center justify-between mb-8">
+                            <div class="flex -space-x-3">
+                                @foreach($group->students->take(4) as $student)
+                                <img src="{{ asset('storage/' . $student->image) }}" class="h-12 w-12 rounded-2xl border-4 border-white object-cover shadow-sm">
+                                @endforeach
+                                @if($group->students->count() > 4)
+                                <div class="flex h-12 w-12 items-center justify-center rounded-2xl border-4 border-white bg-blue-50 text-sm font-black text-blue-800 shadow-sm">+{{ $group->students->count() - 4 }}</div>
+                                @endif
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400 mb-1">Status</p>
+                                <p class="text-xs font-bold text-green-500 flex items-center justify-end">
+                                    <span class="mr-2 inline-flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    Faol guruh
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between gap-4 pt-6 border-t border-slate-100 text-sm text-blue-900 font-black uppercase tracking-[0.2em]">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-arrow-right"></i>
+                                Tafsilotlar
+                            </div>
+                            <div class="rounded-full bg-yellow-400 px-4 py-2 text-xs uppercase tracking-[0.25em] text-blue-900 shadow-sm">
+                                {{ $group->result_percentage }}% natija
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Group Modal -->
+    <div x-show="showModal" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/50 p-4 md:p-6" x-transition.opacity @click.self="showModal = false">
+        <div class="relative w-full max-w-6xl rounded-3xl bg-white shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button @click="showModal = false" class="sticky top-6 right-6 z-20 float-right inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 shadow-lg transition hover:bg-red-200">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <div class="md:flex">
+                <div class="md:w-1/3 bg-gradient-to-b from-blue-50 to-white p-8 md:p-10 flex flex-col items-center text-center">
+                    <div class="relative mb-8 h-72 w-72 overflow-hidden rounded-3xl border-4 border-blue-100 bg-gray-100 shadow-xl flex items-center justify-center">
+                        <img x-show="selectedGroup?.image" 
+                             :src="selectedGroup?.image ? '{{ asset('storage/') }}' + selectedGroup.image : ''" 
+                             class="h-full w-full object-cover"
+                             @error="this.src = 'https://ui-avatars.com/api/?name=' + selectedGroup.name">
+                        <div class="absolute inset-0 flex items-center justify-center bg-blue-900/10 opacity-0 transition-opacity duration-300 hover:opacity-100 cursor-zoom-in"
+                             @click="selectedGroup?.image && (zoomedImageSrc = '{{ asset('storage/') }}' + selectedGroup.image, zoomImage = true)">
+                            <i class="fas fa-search-plus text-blue-600 text-4xl"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-3" x-text="selectedGroup?.name"></h2>
+                    <div class="inline-flex rounded-full bg-blue-600 px-6 py-2 text-xs md:text-sm uppercase tracking-[0.25em] text-white shadow-lg" x-text="selectedGroup?.direction"></div>
+                </div>
+
+                <div class="md:w-2/3 p-8 md:p-10 lg:p-14 overflow-y-auto">
+                    <!-- Teachers Section -->
+                    <div class="mb-10">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-1 rounded-full bg-yellow-400 mr-3"></div>
+                            <h3 class="text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-blue-900">Mas'ullar</h3>
+                        </div>
+
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div class="rounded-2xl border-2 border-blue-100 bg-blue-50 p-5 flex items-center gap-4">
+                                <div class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-white shadow-lg overflow-hidden">
+                                    <img x-show="selectedGroup?.teacher?.image"
+                                         :src="selectedGroup?.teacher?.image ? '{{ asset('storage/') }}' + selectedGroup.teacher.image : ''" 
+                                         class="h-full w-full object-cover">
+                                    <i x-show="!selectedGroup?.teacher?.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.35em] text-blue-500 mb-2">Asosiy tarbiyachi</p>
+                                    <p class="text-lg font-bold text-blue-900 truncate" x-text="selectedGroup?.teacher?.name || 'Mavjud emas'"></p>
+                                </div>
+                            </div>
+                            <div class="rounded-2xl border-2 border-yellow-100 bg-yellow-50 p-5 flex items-center gap-4">
+                                <div class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-white shadow-lg overflow-hidden">
+                                    <img x-show="selectedGroup?.assistant?.image"
+                                         :src="selectedGroup?.assistant?.image ? '{{ asset('storage/') }}' + selectedGroup.assistant.image : ''" 
+                                         class="h-full w-full object-cover">
+                                    <i x-show="!selectedGroup?.assistant?.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.35em] text-yellow-600 mb-2">Yordamchi</p>
+                                    <p class="text-lg font-bold text-blue-900 truncate" x-text="selectedGroup?.assistant?.name || 'Mavjud emas'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Students Section -->
+                    <div class="mb-10">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-1 rounded-full bg-blue-600 mr-3"></div>
+                            <h3 class="text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-blue-900">Tarbiyalanuvchilar</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5">
+                            <template x-for="student in selectedGroup?.students?.slice(0, 15)" :key="student.id">
+                                <div class="cursor-pointer group" 
+                                     @click="student.image && (zoomedImageSrc = '{{ asset('storage/') }}' + student.image, zoomImage = true)">
+                                    <div class="relative aspect-square overflow-hidden rounded-2xl border-3 border-white bg-gray-100 shadow-lg transition duration-300 group-hover:shadow-xl flex items-center justify-center">
+                                        <img x-show="student.image"
+                                             :src="student.image ? '{{ asset('storage/') }}' + student.image : ''" 
+                                             class="h-full w-full object-cover">
+                                        <i x-show="!student.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                        <div class="absolute inset-0 flex items-center justify-center bg-blue-900/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                            <i class="fas fa-search-plus text-white text-lg"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2 text-center text-xs font-bold uppercase tracking-[0.2em] text-gray-500 truncate" x-text="student.name"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="flex gap-4">
+                        <button @click="selectedGroup && (window.location.href = '#')" class="inline-flex items-center justify-center rounded-full bg-blue-900 px-8 py-3 text-sm font-bold uppercase tracking-[0.25em] text-white shadow-lg transition hover:bg-blue-800">
+                            <i class="fas fa-phone-alt mr-2"></i> Bog'lanish
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <main class="container mx-auto p-4">
-        <h2 class="text-3xl font-bold mb-8 text-blue-800 text-center">Sevinch 475 Guruhlar</h2>
+    <!-- Zoom Overlay -->
+    <div x-show="zoomImage" x-cloak class="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4" @click="zoomImage = false" x-transition.opacity>
+        <button @click="zoomImage = false" class="absolute right-6 top-6 text-white text-3xl hover:text-red-400 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <img :src="zoomedImageSrc" class="max-h-full max-w-full rounded-2xl object-contain shadow-2xl">
+    </div>
 
-        <!-- GROUP CARDS -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            @foreach($groups as $group)
-            <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                <div class="bg-blue-700 p-4 text-white text-center">
-                    <h3 class="text-2xl font-bold">{{ $group->name }}</h3>
-                </div>
-                <div class="p-4 text-center">
-                    <div class="text-sm text-gray-500 mb-2">{{ $group->direction }}</div>
-                    <div class="text-lg font-medium text-gray-800">{{ $group->schedule_image }} Students</div>
-                    <button onclick="openGroupModal({{ $group->id }})" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">
-                        Tafsilotlarni Ko'rish
-                    </button>
-                </div>
-            </div>
-
-            <!-- GROUP MODAL -->
-            <div id="group-modal-{{ $group->id }}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                <div class="bg-white rounded-xl shadow-xl w-full max-w-6xl max-h-screen overflow-auto p-6">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-blue-800">Group {{ $group->name }} - Tafsilotlar</h2>
-                        <button onclick="closeGroupModal({{ $group->id }})" class="text-gray-500 hover:text-gray-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <div class="border-b border-gray-200 mb-6">
-                        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
-                            <li class="mr-2">
-                                <a href="#" class="group-tab-link active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600" data-group="{{ $group->id }}" data-tab="schedule">
-                                    Guruh rasmi
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="group-tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" data-group="{{ $group->id }}" data-tab="results">
-                                    Natija
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div id="group-schedule-{{ $group->id }}" class="group-tab-content">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Guruh rasmi</h3>
-                        <div class="bg-gray-50 rounded-lg p-4 overflow-x-auto">
-                            <img src="{{ asset('storage/' . $group->image) }}" alt="Weekly Schedule" class="w-full h-auto rounded shadow-sm">
-                            <p class="text-sm text-gray-600 mt-2 text-center">Group {{ $group->name }} Guruh rasmi</p>
-                        </div>
-                    </div>
-
-                    <div id="group-results-{{ $group->id }}" class="group-tab-content hidden">
-                        <h3 class="text-xl font-semibold mb-4 text-blue-700">Baholash Natijalari</h3>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            <div class="bg-white p-6 rounded-lg shadow-md">
-                                <h4 class="text-lg font-medium mb-4 text-blue-800 border-b pb-2">Qabul Qilish Natijalari</h4>
-                                <div class="h-64 bg-gray-100 rounded flex items-center justify-center">
-                                    <div class="text-center">
-                                        <div class="text-gray-500 mb-2">Guruh Natijalari</div>
-                                        <div class="text-2xl font-bold text-blue-700">Imtihonlar Bo'yicha: {{ $group->result_percentage }}%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
-
-        <!-- COURSES SECTION -->
-        <section id="courses" class="py-20 bg-gray-50 mt-10">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-16">
-                    <span class="inline-block mb-4 bg-violet-500/10 text-violet-500 border border-violet-500/20 px-3 py-1 rounded-full text-sm">
-                        Ta'lim dasturlari
-                    </span>
-                    <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">Bizning kurslar</h2>
-                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Zamonaviy ta'lim dasturlari va yo'nalishlari bilan tanishing
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    @foreach($courses as $course)
-                    <div class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                        <div class="p-6">
-                            <div class="w-12 h-12 bg-violet-500/10 text-violet-500 rounded-lg flex items-center justify-center mb-4">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $course->icon }}"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold mb-2">{{ $course->title }}</h3>
-                            <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
-                                <div class="flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    {{ $course->duration }} yil
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                                    </svg>
-                                    {{ $course->student_count }} talaba
-                                </div>
-                            </div>
-                            <button onclick="openCourseModal({{ $course->id }})" class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg transition-colors">
-                                Batafsil ma'lumot
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- COURSE MODAL -->
-                    <div id="course-modal-{{ $course->id }}" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-                        <div class="bg-white rounded-xl shadow-xl w-full max-w-6xl max-h-screen overflow-auto p-6">
-                            <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-2xl font-bold text-blue-800">{{ $course->title }} - Tafsilotlar</h2>
-                                <button onclick="closeCourseModal({{ $course->id }})" class="text-gray-500 hover:text-gray-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            <div class="border-b border-gray-200 mb-6">
-                                <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
-                                    <li class="mr-2">
-                                        <a href="#" class="course-tab-link active inline-block p-4 border-b-2 border-blue-600 rounded-t-lg text-blue-600" data-course="{{ $course->id }}" data-tab="info">
-                                            Batafsil Ma'lumot
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="course-tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300" data-course="{{ $course->id }}" data-tab="video">
-                                            Video
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div id="course-info-{{ $course->id }}" class="course-tab-content">
-                                <h3 class="text-xl font-semibold mb-4 text-blue-700">Batafsil ma'lumot</h3>
-                                <div class="bg-gray-50 rounded-lg p-6">
-                                    <p class="text-gray-700 leading-relaxed">{{ $course->description }}</p>
-                                </div>
-                            </div>
-
-                            <div id="course-video-{{ $course->id }}" class="course-tab-content hidden">
-                                <h3 class="text-xl font-semibold mb-4 text-blue-700">Kurs videolari</h3>
-                                <div class="bg-gray-50 rounded-lg p-6">
-                                    @if($course->videos && $course->videos->count() > 0)
-                                        <div class="space-y-6">
-                                            @foreach($course->videos as $video)
-                                                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                                                    <div class="p-4 bg-gradient-to-r from-blue-600 to-blue-700">
-                                                        <h4 class="text-white font-semibold text-lg">{{ $video->title }}</h4>
-                                                        @if($video->published_at)
-                                                            <p class="text-blue-100 text-sm mt-1">
-                                                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                                                </svg>
-                                                                {{ $video->published_at->format('d.m.Y') }}
-                                                            </p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="p-4">
-                                                        <div class="video-container">
-                                                            <iframe src="{{ $video->embed_url }}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        <div class="text-center py-12">
-                                            <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                                            </svg>
-                                            <p class="text-gray-500 text-lg font-medium">Video hozircha mavjud emas</p>
-                                            <p class="text-gray-400 text-sm mt-2">Tez orada yangi videolar qo'shiladi</p>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
     <x-footer></x-footer>
 
-    <script>
-    // GROUP MODAL FUNCTIONS
-    function openGroupModal(id) {
-        document.getElementById(`group-modal-${id}`).classList.remove('hidden');
-    }
+</div>
 
-    function closeGroupModal(id) {
-        document.getElementById(`group-modal-${id}`).classList.add('hidden');
-    }
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    // COURSE MODAL FUNCTIONS
-    function openCourseModal(id) {
-        document.getElementById(`course-modal-${id}`).classList.remove('hidden');
-    }
-
-    function closeCourseModal(id) {
-        document.getElementById(`course-modal-${id}`).classList.add('hidden');
-    }
-
-    // GROUP TAB SWITCHING
-    document.querySelectorAll('.group-tab-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const groupId = this.dataset.group;
-            const tab = this.dataset.tab;
-
-            // Hide all group tabs for this modal
-            document.querySelectorAll(`[id^="group-schedule-${groupId}"], [id^="group-results-${groupId}"]`).forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            // Show selected tab
-            document.getElementById(`group-${tab}-${groupId}`).classList.remove('hidden');
-
-            // Update tab link styles
-            document.querySelectorAll(`[data-group="${groupId}"]`).forEach(l => {
-                l.classList.remove('border-blue-600', 'text-blue-600', 'active');
-                l.classList.add('border-transparent');
-            });
-
-            this.classList.add('border-blue-600', 'text-blue-600', 'active');
-            this.classList.remove('border-transparent');
-        });
-    });
-
-    // COURSE TAB SWITCHING
-    document.querySelectorAll('.course-tab-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const courseId = this.dataset.course;
-            const tab = this.dataset.tab;
-
-            // Hide all course tabs for this modal
-            document.querySelectorAll(`[id^="course-info-${courseId}"], [id^="course-video-${courseId}"]`).forEach(content => {
-                content.classList.add('hidden');
-            });
-
-            // Show selected tab
-            document.getElementById(`course-${tab}-${courseId}`).classList.remove('hidden');
-
-            // Update tab link styles
-            document.querySelectorAll(`[data-course="${courseId}"]`).forEach(l => {
-                l.classList.remove('border-blue-600', 'text-blue-600', 'active');
-                l.classList.add('border-transparent');
-            });
-
-            this.classList.add('border-blue-600', 'text-blue-600', 'active');
-            this.classList.remove('border-transparent');
-        });
-    });
-
-    // Close modals when clicking outside
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('bg-opacity-50')) {
-            e.target.classList.add('hidden');
-        }
-    });
-    </script>
 </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dars jarayoni</title>
+</head>
+<body>
+<x-header></x-header>
 
+<div class="font-sans bg-gray-50" x-data="{
+    showModal: false,
+    selectedGroup: null,
+    zoomImage: false,
+    zoomedImageSrc: ''
+}">
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-r from-blue-900 via-unipix-blue to-blue-800 py-20">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute -left-16 top-10 h-72 w-72 rounded-full bg-white/20 blur-3xl"></div>
+            <div class="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-yellow-400/20 blur-3xl"></div>
+        </div>
+        <div class="container mx-auto relative z-10 px-4 text-center text-white">
+            <span class="inline-flex rounded-full bg-yellow-400/20 px-4 py-2 text-xs font-black uppercase tracking-[0.35em] text-yellow-100 mb-6">
+                Dars jarayoni
+            </span>
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-[0.03em] mb-6">Sevinch 475 guruhlari</h1>
+            <p class="mx-auto max-w-3xl text-lg leading-relaxed text-blue-100">
+                Har bir guruhimiz iqtidorli tarbiyachilar, yordamchi tarbiyachilar va malakali bolalar bilan ajoyib o'quv jarayoniga ega.
+            </p>
+        </div>
+    </section>
+
+    <!-- Groups Grid -->
+    <section class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                @foreach($groups as $group)
+                    <div class="group-card relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl cursor-pointer"
+                         @click="selectedGroup = @json($group); showModal = true; zoomImage = false;">
+                        <div class="relative h-72 overflow-hidden">
+                            <img src="{{ asset('storage/' . $group->image) }}" alt="{{ $group->name }}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-blue-950/80 via-blue-950/10 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 right-0 p-8">
+                                <h3 class="text-3xl font-black text-white">{{ $group->name }}</h3>
+                                <p class="mt-2 text-sm uppercase tracking-[0.25em] text-blue-200">{{ $group->direction }}</p>
+                            </div>
+                        </div>
+
+                        <div class="p-8">
+                            <div class="flex items-center justify-between mb-8">
+                                <div class="flex -space-x-3">
+                                    @foreach($group->students->take(4) as $student)
+                                        <img src="{{ asset('storage/' . $student->image) }}" class="h-12 w-12 rounded-2xl border-4 border-white object-cover shadow-sm">
+                                    @endforeach
+                                    @if($group->students->count() > 4)
+                                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl border-4 border-white bg-blue-50 text-sm font-black text-blue-800 shadow-sm">+{{ $group->students->count() - 4 }}</div>
+                                    @endif
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.35em] text-gray-400 mb-1">Status</p>
+                                    <p class="text-xs font-bold text-green-500 flex items-center justify-end">
+                                        <span class="mr-2 inline-flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                                        Faol guruh
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between gap-4 pt-6 border-t border-slate-100 text-sm text-blue-900 font-black uppercase tracking-[0.2em]">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-arrow-right"></i>
+                                    Tafsilotlar
+                                </div>
+                                <div class="rounded-full bg-yellow-400 px-4 py-2 text-xs uppercase tracking-[0.25em] text-blue-900 shadow-sm">
+                                    {{ $group->result_percentage }}% natija
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Group Modal -->
+    <div x-show="showModal" x-cloak class="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/50 p-4 md:p-6" x-transition.opacity @click.self="showModal = false">
+        <div class="relative w-full max-w-6xl rounded-3xl bg-white shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button @click="showModal = false" class="sticky top-6 right-6 z-20 float-right inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600 shadow-lg transition hover:bg-red-200">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <div class="md:flex">
+                <div class="md:w-1/3 bg-gradient-to-b from-blue-50 to-white p-8 md:p-10 flex flex-col items-center text-center">
+                    <div class="relative mb-8 h-72 w-72 overflow-hidden rounded-3xl border-4 border-blue-100 bg-gray-100 shadow-xl flex items-center justify-center">
+                        <img x-show="selectedGroup?.image" 
+                             :src="selectedGroup?.image ? '{{ asset('storage/') }}' + selectedGroup.image : ''" 
+                             class="h-full w-full object-cover"
+                             @error="this.src = 'https://ui-avatars.com/api/?name=' + selectedGroup.name">
+                        <div class="absolute inset-0 flex items-center justify-center bg-blue-900/10 opacity-0 transition-opacity duration-300 hover:opacity-100 cursor-zoom-in"
+                             @click="selectedGroup?.image && (zoomedImageSrc = '{{ asset('storage/') }}' + selectedGroup.image, zoomImage = true)">
+                            <i class="fas fa-search-plus text-blue-600 text-4xl"></i>
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-3" x-text="selectedGroup?.name"></h2>
+                    <div class="inline-flex rounded-full bg-blue-600 px-6 py-2 text-xs md:text-sm uppercase tracking-[0.25em] text-white shadow-lg" x-text="selectedGroup?.direction"></div>
+                </div>
+
+                <div class="md:w-2/3 p-8 md:p-10 lg:p-14 overflow-y-auto">
+                    <!-- Teachers Section -->
+                    <div class="mb-10">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-1 rounded-full bg-yellow-400 mr-3"></div>
+                            <h3 class="text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-blue-900">Mas'ullar</h3>
+                        </div>
+
+                        <div class="grid gap-5 sm:grid-cols-2">
+                            <div class="rounded-2xl border-2 border-blue-100 bg-blue-50 p-5 flex items-center gap-4">
+                                <div class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-white shadow-lg overflow-hidden">
+                                    <img x-show="selectedGroup?.teacher?.image"
+                                         :src="selectedGroup?.teacher?.image ? '{{ asset('storage/') }}' + selectedGroup.teacher.image : ''" 
+                                         class="h-full w-full object-cover">
+                                    <i x-show="!selectedGroup?.teacher?.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.35em] text-blue-500 mb-2">Asosiy tarbiyachi</p>
+                                    <p class="text-lg font-bold text-blue-900 truncate" x-text="selectedGroup?.teacher?.name || 'Mavjud emas'"></p>
+                                </div>
+                            </div>
+                            <div class="rounded-2xl border-2 border-yellow-100 bg-yellow-50 p-5 flex items-center gap-4">
+                                <div class="flex h-20 w-20 flex-shrink-0 items-center justify-center rounded-2xl bg-white shadow-lg overflow-hidden">
+                                    <img x-show="selectedGroup?.assistant?.image"
+                                         :src="selectedGroup?.assistant?.image ? '{{ asset('storage/') }}' + selectedGroup.assistant.image : ''" 
+                                         class="h-full w-full object-cover">
+                                    <i x-show="!selectedGroup?.assistant?.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                </div>
+                                <div class="min-w-0">
+                                    <p class="text-[10px] font-black uppercase tracking-[0.35em] text-yellow-600 mb-2">Yordamchi</p>
+                                    <p class="text-lg font-bold text-blue-900 truncate" x-text="selectedGroup?.assistant?.name || 'Mavjud emas'"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Students Section -->
+                    <div class="mb-10">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-1 rounded-full bg-blue-600 mr-3"></div>
+                            <h3 class="text-xl md:text-2xl font-black uppercase tracking-[0.3em] text-blue-900">Tarbiyalanuvchilar</h3>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-5">
+                            <template x-for="student in selectedGroup?.students?.slice(0, 15)" :key="student.id">
+                                <div class="cursor-pointer group" 
+                                     @click="student.image && (zoomedImageSrc = '{{ asset('storage/') }}' + student.image, zoomImage = true)">
+                                    <div class="relative aspect-square overflow-hidden rounded-2xl border-3 border-white bg-gray-100 shadow-lg transition duration-300 group-hover:shadow-xl flex items-center justify-center">
+                                        <img x-show="student.image"
+                                             :src="student.image ? '{{ asset('storage/') }}' + student.image : ''" 
+                                             class="h-full w-full object-cover">
+                                        <i x-show="!student.image" class="fas fa-user text-2xl text-gray-300"></i>
+                                        <div class="absolute inset-0 flex items-center justify-center bg-blue-900/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                            <i class="fas fa-search-plus text-white text-lg"></i>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2 text-center text-xs font-bold uppercase tracking-[0.2em] text-gray-500 truncate" x-text="student.name"></p>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <!-- Contact -->
+                    <div class="flex gap-4">
+                        <button @click="selectedGroup && (window.location.href = '#')" class="inline-flex items-center justify-center rounded-full bg-blue-900 px-8 py-3 text-sm font-bold uppercase tracking-[0.25em] text-white shadow-lg transition hover:bg-blue-800">
+                            <i class="fas fa-phone-alt mr-2"></i> Bog'lanish
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoom Overlay -->
+    <div x-show="zoomImage" x-cloak class="fixed inset-0 z-[200] flex items-center justify-center bg-black/95 p-4" @click="zoomImage = false" x-transition.opacity>
+        <button @click="zoomImage = false" class="absolute right-6 top-6 text-white text-3xl hover:text-red-400 transition">
+            <i class="fas fa-times"></i>
+        </button>
+        <img :src="zoomedImageSrc" class="max-h-full max-w-full rounded-2xl object-contain shadow-2xl">
+    </div>
+
+    <x-footer></x-footer>
+</div>
+
+</body>
 </html>

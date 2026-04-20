@@ -11,7 +11,7 @@ class GroupController extends Controller
     public function index()
     {
         $courses = Course::all();
-        $groups = Group::all();
+        $groups = Group::with(['teacher', 'assistant', 'students'])->get();
         return view('dars', compact('groups','courses'));
     }
 }
