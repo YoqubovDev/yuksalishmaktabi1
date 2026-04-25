@@ -1985,8 +1985,8 @@
 }" @keydown.escape.window="closeProfile()">
 
   <!-- Hero Slider Section -->
-  <section class="main-slider">
-    <div class="main-slides">
+  <section class="main-slider" x-data="{ currentSlide: 0, totalSlides: 3 }" x-init="setInterval(() => { currentSlide = (currentSlide + 1) % totalSlides }, 5000)">
+    <div class="main-slides" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
       <!-- Slide 1 -->
       <div class="main-slide">
         <img src="/image/orig.jpeg" alt="Campus Building" class="w-full h-full object-cover">
@@ -2038,19 +2038,19 @@
     </div>
 
     <!-- Navigation Dots -->
-    <div class="absolute bottom-12 left-0 right-0 flex justify-center space-x-6">
+    <div class="absolute bottom-12 left-0 right-0 flex justify-center space-x-6 z-20">
       <div class="flex space-x-2 slide-dots">
-        <span class="w-8 h-2 bg-white rounded-full bg-opacity-80 dot active" data-index="0"></span>
-        <span class="w-2 h-2 bg-white rounded-full bg-opacity-50 dot" data-index="1"></span>
-        <span class="w-2 h-2 bg-white rounded-full bg-opacity-50 dot" data-index="2"></span>
+        <span @click="currentSlide = 0" class="h-2 bg-white rounded-full cursor-pointer transition-all duration-300" :class="currentSlide === 0 ? 'w-8 bg-opacity-80' : 'w-2 bg-opacity-50'"></span>
+        <span @click="currentSlide = 1" class="h-2 bg-white rounded-full cursor-pointer transition-all duration-300" :class="currentSlide === 1 ? 'w-8 bg-opacity-80' : 'w-2 bg-opacity-50'"></span>
+        <span @click="currentSlide = 2" class="h-2 bg-white rounded-full cursor-pointer transition-all duration-300" :class="currentSlide === 2 ? 'w-8 bg-opacity-80' : 'w-2 bg-opacity-50'"></span>
       </div>
     </div>
 
     <!-- Navigation Arrows -->
-    <button class="slider-prev absolute left-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 backdrop-blur-sm rounded-full border border-white text-white flex items-center justify-center focus:outline-none hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+    <button @click="currentSlide = currentSlide > 0 ? currentSlide - 1 : totalSlides - 1" class="slider-prev absolute left-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 backdrop-blur-sm rounded-full border border-white text-white flex items-center justify-center focus:outline-none hover:bg-white hover:bg-opacity-20 transition-all duration-300 z-20">
       <i class="fas fa-chevron-left"></i>
     </button>
-    <button class="slider-next absolute right-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 backdrop-blur-sm rounded-full border border-white text-white flex items-center justify-center focus:outline-none hover:bg-white hover:bg-opacity-20 transition-all duration-300">
+    <button @click="currentSlide = currentSlide < totalSlides - 1 ? currentSlide + 1 : 0" class="slider-next absolute right-6 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-10 backdrop-blur-sm rounded-full border border-white text-white flex items-center justify-center focus:outline-none hover:bg-white hover:bg-opacity-20 transition-all duration-300 z-20">
       <i class="fas fa-chevron-right"></i>
     </button>
   </section>

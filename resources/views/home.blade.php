@@ -5233,7 +5233,7 @@
                             data-fields="top,left,width,height,container,axisx,axisy,widthunits,leftunits,topunits"
                             style="top: 64px; left: 316px; width: 574px; height: auto; transform: unset; transition-duration: 0.7s;"
                             data-observer-ready="true">
-                            <div class="tn-atom" field="tn_text_1742850034486" style="line-height: 56px;">O’quv
+                            <div class="tn-atom" field="tn_text_1742850034486" style="line-height: 56px;">O'quv
                                 dasturlarimiz</div>
                         </div>
                         <div class="t396__elem tn-elem tn-elem__9109277921742850034488 t-animate t-animate_wait"
@@ -10058,9 +10058,6 @@
                             data-fields="top,left,width,height,container,axisx,axisy,caption,leftunits,topunits"
                             style="top: 9px; left: 453px; width: 301px; height: 74px; transform: unset; transition-duration: 0.7s;"
                             data-observer-ready="true"> <a class="tn-atom" href="https://yuksalishmaktabi.uz/vacancy">
-                                <div class="tn-atom__button-content"> <span class="tn-atom__button-text">Jamoaga
-                                        qo‘shilish</span> </div> <span class="tn-atom__button-border"></span>
-                            </a> </div>
                     </div>
                 </div>
                 <script>t_onReady(function () { t_onFuncLoad('t396_init', function () { t396_init('1065639336'); }); });</script>
