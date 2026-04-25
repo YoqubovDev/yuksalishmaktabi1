@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jizzax Shahar Yuksalish Maktabi</title>
+    <title>Jizzax shahar Yuksalish maktabi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -784,7 +784,7 @@
             <div class="header-content">
                 <div class="logo">
                     <img style="border-radius: 500px" src="/image/yuksalish-maktabi-al-logo.jpeg" alt="yuksalish-maktabi-al-logo.jpeg">
-                    <div class="logo-text">Jizzax Shahar Yuksalish Maktabi</div>
+                    <div class="logo-text">Jizzax shahar Yuksalish maktabi</div>
                 </div>
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
                     <i class="fas fa-bars menu-icon"></i>

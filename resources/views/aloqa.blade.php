@@ -21,7 +21,7 @@
         <div class="mb-10 text-center">
             <h1 class="text-4xl font-bold text-gray-800 mb-4">Biz bilan bog'laning</h1>
             <p class="text-gray-600 max-w-2xl mx-auto">
-                Jizzax Shahar Yuksalish maktabi bilan bog'lanish uchun quyidagi ma'lumotlardan foydalanishingiz mumkin
+                Jizzax shahar Yuksalish maktabi bilan bog'lanish uchun quyidagi ma'lumotlardan foydalanishingiz mumkin
             </p>
             <div class="w-24 h-1 bg-blue-600 mx-auto mt-4"></div>
         </div>

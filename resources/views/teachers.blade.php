@@ -18,7 +18,7 @@
         <div class="container mx-auto px-4">
             <!-- Section Header -->
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-white mb-4">Muhtaram Ustozlarimiz</h2>
+                <h2 class="text-4xl font-bold text-white mb-4">Muhtaram ustozlarimiz</h2>
                 <div class="w-24 h-1 bg-yellow-400 mx-auto mb-6"></div>
                 <p class="text-blue-100 max-w-2xl mx-auto">Akademik mukammallikni va shaxsiy o'sish tomon bizning talabalarga hidoyat ko'rsatuvchi bizning maxsus fakultet a'zolari bilan tanishish</p>
             </div>
